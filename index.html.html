@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#172b4d">
+<title>ریاضی هشتم | فصل سوم: چندضلعی‌ها</title>
+<style>
+
+:root{
+ --ink:#172b4d;--muted:#64748b;--paper:#f5f7fb;--white:#fff;
+ --teal:#17a99b;--teal2:#dff7f2;--coral:#ff806b;--coral2:#fff0ec;
+ --violet:#7666d8;--violet2:#efedff;--gold:#f2b84b;--gold2:#fff7df;
+ --blue:#4b8bd8;--line:#e6eaf2;--shadow:0 16px 45px rgba(31,48,82,.10);
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 8% 4%,#e8f6f5 0,transparent 24%),radial-gradient(circle at 95% 12%,#f3edff 0,transparent 25%),var(--paper);color:var(--ink);font-family:"Vazirmatn",Tahoma,sans-serif;line-height:1.9}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(23,43,77,.94);backdrop-filter:blur(14px);color:#fff;padding:10px 4vw;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 5px 25px #172b4d25}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900}
+.brand-mark{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,var(--teal),#77d7c7);display:grid;place-items:center;color:#123c4a;font-size:23px;box-shadow:inset 0 2px 5px #fff8}
+.top-actions{display:flex;gap:8px;align-items:center}
+.small-btn{border:1px solid #ffffff40;background:#ffffff14;color:#fff;border-radius:12px;padding:7px 12px;font-size:13px}
+.hero{max-width:1180px;margin:28px auto 20px;padding:0 18px}
+.hero-card{position:relative;overflow:hidden;border-radius:30px;padding:34px 38px;background:linear-gradient(115deg,#172b4d 0%,#24476b 55%,#237f80 100%);color:white;box-shadow:var(--shadow);min-height:230px}
+.hero-card:before,.hero-card:after{content:"";position:absolute;border:2px solid #ffffff20;border-radius:50%;width:230px;height:230px;left:8%;top:-110px}
+.hero-card:after{width:310px;height:310px;left:18%;top:110px}
+.hero-content{position:relative;z-index:1;max-width:720px}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;background:#ffffff18;border:1px solid #ffffff30;border-radius:99px;padding:5px 13px;font-size:12px}
+h1{font-size:clamp(28px,5vw,46px);line-height:1.45;margin:12px 0 5px;font-weight:900}
+.hero p{margin:0;color:#e4f4f4;font-size:15px;max-width:620px}
+.hero-bubbles{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.hero-bubbles span{font-size:12px;padding:5px 11px;border-radius:99px;background:#ffffff17;border:1px solid #ffffff25}
+.hero-shape{position:absolute;left:6%;top:40px;width:170px;height:150px;opacity:.9;z-index:1}
+.layout{max-width:1180px;margin:auto;padding:0 18px 50px;display:grid;grid-template-columns:250px minmax(0,1fr);gap:20px;align-items:start}
+.sidebar{position:sticky;top:76px;background:#fff;border:1px solid var(--line);border-radius:22px;padding:15px;box-shadow:var(--shadow)}
+.side-title{font-size:13px;font-weight:900;color:var(--muted);padding:4px 10px 10px}
+.nav-btn{display:flex;width:100%;text-align:right;align-items:center;gap:10px;border:0;background:transparent;color:var(--ink);padding:11px 12px;border-radius:13px;margin:3px 0;font-size:13px;transition:.2s}
+.nav-btn .num{width:27px;height:27px;display:grid;place-items:center;border-radius:9px;background:#edf2f8;color:#53647d;font-weight:800;font-size:12px;flex-shrink:0}
+.nav-btn:hover{background:#f2f7fb;transform:translateX(-2px)}
+.nav-btn.active{background:var(--teal2);color:#087d72;font-weight:800}
+.nav-btn.active .num{background:var(--teal);color:#fff}
+.nav-divider{height:1px;background:var(--line);margin:12px 4px}
+.content{min-width:0}
+.panel{display:none;animation:rise .35s ease}
+.panel.active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:4px 2px 16px}
+.section-head h2{margin:0;font-size:25px;font-weight:900}
+.section-head p{margin:3px 0 0;color:var(--muted);font-size:13px}
+.pill{border-radius:99px;padding:5px 12px;background:var(--violet2);color:#594bb4;font-size:12px;font-weight:800;white-space:nowrap}
+.card{background:var(--white);border:1px solid var(--line);border-radius:21px;padding:21px;margin-bottom:15px;box-shadow:0 8px 28px rgba(31,48,82,.045)}
+.card h3{font-size:17px;margin:0 0 9px;font-weight:900}
+.card p{margin:7px 0}
+.lead{font-size:15px;color:#40516b}
+.note{border-right:4px solid var(--teal);background:#effaf7;border-radius:13px;padding:12px 15px;margin:13px 0;font-size:14px}
+.warn{border-right-color:var(--coral);background:var(--coral2)}
+.goldnote{border-right-color:var(--gold);background:var(--gold2)}
+.violetnote{border-right-color:var(--violet);background:var(--violet2)}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.mini{background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:14px}
+.mini strong{display:block;margin-bottom:4px}
+.formula{direction:ltr;text-align:center;font-family:Georgia,serif;font-size:22px;font-weight:bold;color:#234f74;background:#f2f7fb;border:1px dashed #b8ccdf;border-radius:14px;padding:13px;margin:10px 0}
+.formula small{display:block;direction:rtl;font-family:inherit;font-size:12px;color:var(--muted);font-weight:500}
+.steps{counter-reset:step;list-style:none;padding:0;margin:10px 0}
+.steps li{position:relative;padding:5px 42px 8px 0;min-height:38px}
+.steps li:before{counter-increment:step;content:counter(step);position:absolute;right:0;top:4px;width:27px;height:27px;border-radius:9px;background:var(--violet2);color:var(--violet);display:grid;place-items:center;font-size:12px;font-weight:900}
+.reveal-btn,.primary-btn,.ghost-btn{border:0;border-radius:12px;padding:9px 15px;font-weight:800;font-size:13px;transition:.2s}
+.reveal-btn{background:var(--violet2);color:#5848bd}
+.reveal-btn:hover,.primary-btn:hover,.ghost-btn:hover{transform:translateY(-2px);filter:brightness(.98)}
+.answer{display:none;background:#f0faf5;border:1px solid #cceee0;padding:12px 14px;border-radius:13px;margin-top:10px;font-size:14px}
+.answer.show{display:block;animation:rise .25s ease}
+.primary-btn{background:var(--teal);color:#fff;box-shadow:0 5px 14px #17a99b35}
+.ghost-btn{background:#edf2f8;color:#31445f}
+.visual{background:linear-gradient(145deg,#f4fbfc,#f6f4ff);border:1px solid #e3edf4;border-radius:18px;padding:12px;display:grid;place-items:center;min-height:190px;overflow:hidden}
+.visual svg{max-width:100%;height:auto}
+.legend{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:7px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:5px}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:540px}
+th,td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:center}
+th{background:#f2f6fa;color:#465a73;font-weight:900}
+tr:last-child td{border-bottom:0}
+td:first-child,th:first-child{text-align:right}
+.shape-chip{display:inline-block;border-radius:8px;padding:3px 8px;font-size:11px;background:#eaf4fb;color:#346b98}
+.explorer-controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}
+select,input[type=number]{border:1px solid #d9e2ec;background:#fff;border-radius:11px;padding:8px 10px;color:var(--ink)}
+.range-val{font-weight:900;color:var(--teal)}
+.quiz-q{border:1px solid var(--line);border-radius:17px;padding:16px;margin:12px 0;background:#fff}
+.quiz-q h4{margin:0 0 12px;font-size:14px;line-height:1.9}
+.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.opt{border:1px solid #dfe6ee;background:#fbfcfe;color:#31445f;text-align:right;border-radius:11px;padding:9px 12px;font-size:13px}
+.opt:hover{border-color:var(--teal);background:#f1fbf8}
+.opt.selected{border-color:var(--teal);background:var(--teal2);color:#08776d;font-weight:800}
+.opt.correct{border-color:#46b68b;background:#e6f8ef;color:#126b48}
+.opt.wrong{border-color:#f18b7c;background:#fff0ec;color:#b74738}
+.feedback{display:none;font-size:12px;margin-top:9px;padding:8px 10px;border-radius:10px;background:#f3f6fa}
+.feedback.show{display:block}
+.quiz-tools{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.scorebox{display:none;text-align:center;padding:20px;background:linear-gradient(135deg,#e6faf4,#f0edff);border-radius:18px;margin:15px 0}
+.scorebox.show{display:block}
+.score-num{font-size:42px;font-weight:900;color:#117f72;line-height:1.3}
+.progress{height:8px;border-radius:99px;background:#e9eef4;overflow:hidden;margin:12px 0}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--teal),#77d7c7);transition:.3s}
+.footer{text-align:center;color:#8190a4;font-size:11px;padding:20px}
+.kicker{font-size:12px;color:var(--teal);font-weight:900}
+.symbol{font-family:Georgia,serif;direction:ltr;display:inline-block;font-weight:bold}
+.mini-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.mini-cards .mini{text-align:center}
+.mini-cards .big{font-size:24px;font-weight:900;color:var(--violet);display:block}
+.lab-stage{background:linear-gradient(145deg,#f4fbfc,#f6f4ff);border:1px solid #e3edf4;border-radius:18px;padding:12px;display:grid;place-items:center;min-height:250px;overflow:hidden}
+.lab-stage svg{width:100%;max-width:520px;height:auto;touch-action:none}
+.lab-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.lab-controls label{font-weight:800;font-size:13px}
+.lab-controls input[type=range]{accent-color:var(--teal);min-width:150px;flex:1}
+.lab-result{padding:12px 14px;border-radius:13px;background:#effaf7;border-right:4px solid var(--teal);font-weight:800;margin-top:10px}
+.lab-result.no{background:#fff0ec;border-color:var(--coral)}
+.lab-hint{font-size:12px;color:var(--muted)}
+@media(max-width:850px){
+ .layout{grid-template-columns:1fr}
+ .sidebar{position:relative;top:auto;display:flex;overflow-x:auto;gap:5px;padding:9px}
+ .side-title,.nav-divider{display:none}
+ .nav-btn{width:auto;white-space:nowrap;padding:8px 10px;margin:0}
+ .nav-btn .num{width:23px;height:23px}
+ .hero-card{padding:26px 23px}
+ .hero-shape{opacity:.22;left:0}
+}
+@media(max-width:560px){
+ .topbar{padding:8px 12px}.brand{font-size:13px}.small-btn{font-size:11px;padding:6px 8px}
+ .hero{margin-top:15px}.hero-card{border-radius:22px;padding:22px 18px;min-height:220px}
+ .hero p{font-size:13px}.layout{padding:0 12px 30px}
+ .section-head h2{font-size:21px}.section-head{align-items:flex-start;flex-direction:column}
+ .card{padding:16px;border-radius:17px}
+ .grid2,.grid3{grid-template-columns:1fr}
+ .mini-cards{grid-template-columns:repeat(2,1fr)}
+ .options{grid-template-columns:1fr}
+ .formula{font-size:19px}
+}
+@media print{
+ .topbar,.sidebar,.top-actions,.reveal-btn,.primary-btn,.ghost-btn{display:none!important}
+ body{background:white}.layout{display:block;max-width:none}.panel{display:block!important;page-break-inside:avoid}
+ .hero-card{box-shadow:none}.card{box-shadow:none;break-inside:avoid}
+}
+
+.xp{background:#ffffff1c;border:1px solid #ffffff40;border-radius:99px;padding:5px 12px;font-size:13px;font-weight:800;color:#ffd77a}
+.nav-btn.done .num{background:var(--gold);color:#fff}
+.nav-btn.done .num:after{content:"✓";font-size:11px;margin-right:-2px}
+.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#172b4d;color:#ffd77a;padding:8px 18px;border-radius:99px;font-weight:900;z-index:50;animation:rise .3s}
+.tf{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin:8px 0;background:#fff;flex-wrap:wrap}
+.tf>span{flex:1 1 300px;font-size:14px}
+.tf .btns{display:flex;gap:6px}
+.tf button{border:1px solid #dfe6ee;background:#fbfcfe;border-radius:10px;padding:6px 16px;font-weight:800}
+.tf.ok{background:#e6f8ef;border-color:#46b68b}.tf.no{background:#fff0ec;border-color:#f18b7c}
+.tf .why{flex-basis:100%;font-size:12px;color:#40516b;display:none}.tf.ok .why,.tf.no .why{display:block}
+.mission{background:linear-gradient(135deg,#f0edff,#e6faf4);border-radius:18px;padding:16px;margin:10px 0}
+.mission input[type=text]{border:1px solid #d9e2ec;border-radius:11px;padding:8px 12px;width:110px;text-align:center;font-weight:800}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin:8px 0}.chips span{background:var(--violet2);color:#594bb4;border-radius:99px;padding:4px 12px;font-size:13px;font-weight:800}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tabs .reveal-btn.on{background:var(--violet);color:#fff}
+.gp{display:none}.gp.show{display:block}
+.author{margin-top:12px;display:inline-block;background:#ffd77a;color:#172b4d;border-radius:12px;padding:6px 16px;font-weight:900;font-size:15px}
+.etabs{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.etabs .reveal-btn.on{background:var(--violet);color:#fff}
+.dsvg{width:100%;background:#fbfdff;border:1px solid var(--line);border-radius:16px;touch-action:none;user-select:none}
+.hint{font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <div class="brand"><span class="brand-mark">∠</span><span>کارگاه هوشمند ریاضی هشتم</span></div>
+ <div class="top-actions">
+  <span class="xp">⭐ <b id="xpVal">۰</b> امتیاز</span><button class="small-btn" onclick="window.print()">چاپ درسنامه</button>
+ </div>
+</header>
+
+<section class="hero">
+ <div class="hero-card">
+  <svg class="hero-shape" viewBox="0 0 180 160" aria-hidden="true">
+   <polygon points="90,8 160,58 133,140 47,140 20,58" fill="#ffffff10" stroke="#ffffffbb" stroke-width="3"/>
+   <path d="M90 8L90 140M20 58L133 140M160 58L47 140" stroke="#ffffff66" stroke-width="2"/>
+   <circle cx="90" cy="78" r="6" fill="#ffc96c"/>
+  </svg>
+  <div class="hero-content">
+   <span class="eyebrow">پایه هشتم · فصل سوم · هندسه</span>
+   <div class="author">طراح و مدرس: نیکتا تفضلی</div>
+   <h1>دنیای چندضلعی‌ها</h1>
+   <p>از کشف تقارن و خطوط موازی تا شناخت چهارضلعی‌ها و راز زاویه‌های داخلی و خارجی؛ این بار هندسه را ببین، لمس کن و خودت کشف کن.</p>
+   <div class="hero-bubbles"><span>۵ درس آموزشی</span><span>۶ آزمایش + ۴ چالش</span><span>مثال‌های حل‌شده</span><span>۴۰ پرسش متنوع</span></div>
+  </div>
+ </div>
+</section>
+
+<div class="layout">
+ <aside class="sidebar">
+  <div class="side-title">فهرست فصل</div>
+  <button class="nav-btn active" data-panel="home"><span class="num">⌂</span> شروع و نقشه راه</button>
+  <button class="nav-btn" data-panel="lesson1"><span class="num">۱</span> چندضلعی‌ها و تقارن</button>
+  <button class="nav-btn" data-panel="lesson2"><span class="num">۲</span> توازی و تعامد</button>
+  <button class="nav-btn" data-panel="lesson3"><span class="num">۳</span> چهارضلعی‌ها</button>
+  <button class="nav-btn" data-panel="lesson4"><span class="num">۴</span> زاویه‌های داخلی</button>
+  <button class="nav-btn" data-panel="lesson5"><span class="num">۵</span> زاویه‌های خارجی</button>
+  <button class="nav-btn" data-panel="lab"><span class="num">⚗</span> آزمایشگاه ریاضی</button>
+  <button class="nav-btn" data-panel="game"><span class="num">★</span> چالش و بازی</button>
+  <div class="nav-divider"></div>
+  <button class="nav-btn" data-panel="formula"><span class="num">∑</span> جعبه فرمول‌ها</button>
+  <button class="nav-btn" data-panel="practice"><span class="num">✎</span> تمرین و آزمون</button>
+ </aside>
+
+ <main class="content">
+  <section class="panel active" id="home">
+   <div class="section-head"><div><h2>به سرزمین چندضلعی‌ها خوش آمدی!</h2><p>برای شروع، مسیر یادگیری فصل را مرور کن.</p></div><span class="pill">نقشه راه</span></div>
+   <div class="card">
+    <div class="grid2">
+     <div>
+      <div class="kicker">هدف این فصل</div>
+      <h3 style="font-size:21px">هندسه را فقط حفظ نکن؛ دلیلش را پیدا کن.</h3>
+      <p class="lead">در این فصل یاد می‌گیری شکل‌ها را بر اساس ضلع‌ها، زاویه‌ها و تقارن دسته‌بندی کنی؛ از رابطه خطوط و زاویه‌ها کمک بگیری و مسئله‌های چندمرحله‌ای را حل کنی.</p>
+      <div class="note">پیشنهاد: درس‌ها را به ترتیب بخوان، شکل‌ها را بررسی کن و بعد از هر بخش، مثال را بدون نگاه کردن به پاسخ حل کن.</div>
+     </div>
+     <div class="visual">
+      <svg viewBox="0 0 330 190" width="100%" role="img" aria-label="چند شکل هندسی رنگی">
+       <polygon points="65,20 112,54 94,110 36,110 18,54" fill="#ffd98d" stroke="#c88a28" stroke-width="3"/>
+       <rect x="145" y="28" width="78" height="78" rx="4" fill="#b9e9e2" stroke="#15998d" stroke-width="3"/>
+       <polygon points="278,18 310,75 278,132 214,132 182,75 214,18" fill="#d9d4ff" stroke="#7666d8" stroke-width="3"/>
+       <path d="M65 20V110M18 54L94 110M112 54L36 110" stroke="#c88a28" stroke-width="1.5" opacity=".7"/>
+       <path d="M145 67H223M184 28V106" stroke="#15998d" stroke-width="1.5" opacity=".7"/>
+       <circle cx="65" cy="65" r="4" fill="#c88a28"/><circle cx="184" cy="67" r="4" fill="#15998d"/>
+      </svg>
+     </div>
+    </div>
+   </div>
+   <div class="mini-cards">
+    <div class="mini"><span class="big">۰۱</span><strong>چندضلعی و تقارن</strong><small>شکل، محور و مرکز</small></div>
+    <div class="mini"><span class="big">۰۲</span><strong>توازی و تعامد</strong><small>خطوط و زاویه‌ها</small></div>
+    <div class="mini"><span class="big">۰۳</span><strong>چهارضلعی‌ها</strong><small>ویژگی و دسته‌بندی</small></div>
+    <div class="mini"><span class="big">۰۴</span><strong>زاویه‌ها</strong><small>داخلی و خارجی</small></div>
+   </div>
+   <div class="card">
+    <h3>چطور از این درسنامه استفاده کنم؟</h3>
+    <ol class="steps">
+     <li>از فهرست کنار صفحه، درس موردنظرت را انتخاب کن.</li>
+     <li>شکل‌های رنگی و نکته‌ها را با دقت بررسی کن.</li>
+     <li>برای دیدن راه‌حل مثال‌ها، دکمه «نمایش پاسخ» را بزن.</li>
+     <li>در پایان، آزمون را انجام بده و پاسخ‌های تشریحی را بخوان.</li>
+    </ol>
+    <button class="primary-btn" onclick="showPanel('lesson1')">شروع درس اول ←</button>
+   </div>
+  </section>
+
+  <section class="panel" id="lesson1">
+   <div class="section-head"><div><h2>درس اول: چندضلعی‌ها و تقارن</h2><p>از خط شکسته بسته تا تقارن چرخشی</p></div><span class="pill">درس ۱</span></div>
+   <div class="card">
+    <h3>چندضلعی چیست؟</h3>
+    <p class="lead">به هر خط شکستهٔ بسته که ضلع‌های آن یکدیگر را قطع نکنند، مگر در رأس‌ها، چندضلعی می‌گوییم.</p>
+    <div class="grid3">
+     <div class="mini"><div class="visual" style="min-height:115px"><svg viewBox="0 0 130 90" width="100%"><path d="M20 70L35 15L100 25L110 70Z" fill="#b9e9e2" stroke="#15998d" stroke-width="3"/></svg></div><strong>چندضلعی</strong><small>خط شکسته و بسته</small></div>
+     <div class="mini"><div class="visual" style="min-height:115px"><svg viewBox="0 0 130 90" width="100%"><path d="M20 70L35 15L100 25" fill="none" stroke="#ff806b" stroke-width="4" stroke-linecap="round"/></svg></div><strong>چندضلعی نیست</strong><small>خط شکسته بسته نیست</small></div>
+     <div class="mini"><div class="visual" style="min-height:115px"><svg viewBox="0 0 130 90" width="100%"><path d="M18 15L110 75M18 75L110 15M18 15L110 15L18 75L110 75Z" fill="#fff0ec" stroke="#ff806b" stroke-width="3"/></svg></div><strong>چندضلعی نیست</strong><small>ضلع‌ها در نقطه‌ای غیر از رأس همدیگر را قطع می‌کنند</small></div>
+    </div>
+   </div>
+   <div class="card">
+    <h3>انواع چندضلعی از نظر شکل</h3>
+    <div class="grid2">
+     <div class="mini"><div class="visual"><svg viewBox="0 0 210 135" width="100%"><polygon points="105,12 190,115 20,115" fill="#c8eee7" stroke="#149d90" stroke-width="3"/><path d="M105 12L105 115" stroke="#149d90" stroke-dasharray="4 4"/></svg></div><strong>محدب (کوژ)</strong><p>تمام زاویه‌های داخلی آن کمتر از ۱۸۰ درجه‌اند.</p></div>
+     <div class="mini"><div class="visual"><svg viewBox="0 0 210 135" width="100%"><polygon points="18,20 90,20 115,58 190,20 170,120 90,92 18,120" fill="#ffe1d9" stroke="#ed806d" stroke-width="3"/><path d="M90 20L90 92" stroke="#ed806d" stroke-dasharray="4 4"/></svg></div><strong>مقعر (کاو)</strong><p>دست‌کم یک زاویه داخلی بزرگ‌تر از ۱۸۰ درجه دارد.</p></div>
+    </div>
+    <div class="note goldnote">راه تشخیص: در چندضلعی محدب، پاره‌خط بین هر دو نقطه داخل شکل، کاملاً درون شکل می‌ماند.</div>
+   </div>
+   <div class="card">
+    <h3>چندضلعی منتظم</h3>
+    <p>اگر همه ضلع‌ها با هم و همه زاویه‌ها نیز با هم مساوی باشند، چندضلعی منتظم است.</p>
+    <div class="grid3">
+     <div class="mini" style="text-align:center"><svg viewBox="0 0 100 90" width="100%"><polygon points="50,8 91,78 9,78" fill="#ffdf9c" stroke="#c68c2e" stroke-width="3"/></svg><strong>مثلث متساوی‌الاضلاع</strong></div>
+     <div class="mini" style="text-align:center"><svg viewBox="0 0 100 90" width="100%"><rect x="12" y="8" width="76" height="76" fill="#b9e9e2" stroke="#15998d" stroke-width="3"/></svg><strong>مربع</strong></div>
+     <div class="mini" style="text-align:center"><svg viewBox="0 0 100 90" width="100%"><polygon points="50,5 94,37 77,85 23,85 6,37" fill="#d9d4ff" stroke="#7666d8" stroke-width="3"/></svg><strong>پنج‌ضلعی منتظم</strong></div>
+    </div>
+   </div>
+   <div class="card">
+    <h3>مرکز تقارن و محور تقارن</h3>
+    <div class="grid2">
+     <div class="mini">
+      <strong>مرکز تقارن</strong>
+      <p>اگر شکل را ۱۸۰ درجه حول نقطه‌ای بچرخانیم و دوباره دقیقاً بر خودش منطبق شود، آن نقطه مرکز تقارن است.</p>
+      <div class="visual"><svg viewBox="0 0 180 130" width="100%"><polygon points="90,15 150,65 90,115 30,65" fill="#c8eee7" stroke="#149d90" stroke-width="3"/><path d="M90 15V115M30 65H150" stroke="#149d90" stroke-dasharray="4 4"/><circle cx="90" cy="65" r="5" fill="#e87962"/><text x="101" y="60" font-size="12" fill="#172b4d">O</text></svg></div>
+     </div>
+     <div class="mini">
+      <strong>محور تقارن</strong>
+      <p>خطی که شکل را به دو قسمت آینه‌ای و منطبق بر هم تقسیم می‌کند.</p>
+      <div class="visual"><svg viewBox="0 0 180 130" width="100%"><polygon points="90,12 155,112 25,112" fill="#ffe2a6" stroke="#c68c2e" stroke-width="3"/><path d="M90 5V120" stroke="#7666d8" stroke-width="3" stroke-dasharray="5 4"/><circle cx="90" cy="12" r="3" fill="#7666d8"/></svg></div>
+     </div>
+    </div>
+    <div class="note">ممکن است شکلی مرکز تقارن داشته باشد ولی محور تقارن نداشته باشد؛ مانند متوازی‌الاضلاع معمولی. همچنین مثلث متساوی‌الساقین محور تقارن دارد، اما مرکز تقارن ندارد.</div>
+    <div class="table-wrap"><table><thead><tr><th>شکل</th><th>تعداد محور تقارن</th><th>مرکز تقارن</th></tr></thead><tbody>
+     <tr><td>مثلث متساوی‌الاضلاع</td><td>۳</td><td>ندارد</td></tr>
+     <tr><td>مربع</td><td>۴</td><td>دارد</td></tr>
+     <tr><td>مستطیل غیرمربع</td><td>۲</td><td>دارد</td></tr>
+     <tr><td>لوزی غیرمربع</td><td>۲</td><td>دارد</td></tr>
+     <tr><td>متوازی‌الاضلاع معمولی</td><td>۰</td><td>دارد</td></tr>
+     <tr><td>دایره</td><td>بی‌شمار</td><td>دارد</td></tr>
+     <tr><td>nضلعی منتظم با n فرد</td><td>n</td><td>ندارد</td></tr>
+     <tr><td>nضلعی منتظم با n زوج</td><td>n</td><td>دارد</td></tr>
+    </tbody></table></div>
+   </div>
+   <div class="card">
+    <h3>آزمایشگاه تقارن چرخشی</h3>
+    <p>تعداد ضلع‌ها را انتخاب کن. ببین چندضلعی منتظم با چه زاویه‌ای برای نخستین بار بر خودش منطبق می‌شود.</p>
+    <div class="explorer-controls"><label for="polyN">تعداد ضلع‌ها:</label><input id="polyN" type="range" min="3" max="12" value="6" oninput="updatePolygon()"><b class="range-val" id="polyNVal">۶</b></div>
+    <div class="grid2">
+     <div class="visual"><svg id="polySvg" viewBox="0 0 240 200" width="100%"></svg></div>
+     <div class="mini">
+      <div class="kicker">نتیجه آزمایش</div>
+      <div class="formula" id="polyAngle">۳۶۰° ÷ ۶ = ۶۰°</div>
+      <p id="polyText">شش‌ضلعی منتظم با دوران ۶۰ درجه بر خودش منطبق می‌شود.</p>
+      <div class="note violetnote">حداقل زاویه دوران = ۳۶۰ درجه ÷ تعداد ضلع‌ها</div>
+      <p style="font-size:12px;color:var(--muted)">سایر زاویه‌های انطباق، مضرب‌های این زاویه تا ۳۶۰ درجه هستند.</p>
+     </div>
+    </div>
+   </div>
+   <div class="card">
+    <h3>مثال حل‌شده</h3>
+    <p>نسبت تعداد محورهای تقارن یک هشت‌ضلعی منتظم به یک شش‌ضلعی منتظم چقدر است؟</p>
+    <button class="reveal-btn" onclick="toggleAnswer('a11')">نمایش پاسخ و راه‌حل</button>
+    <div class="answer" id="a11">در چندضلعی منتظم، تعداد محورهای تقارن برابر تعداد ضلع‌هاست؛ پس نسبت برابر است با ۸ به ۶، یعنی با ساده‌کردن: <b>۴ به ۳</b>.</div>
+   </div>
+   <div class="card"><h3>تکمیل درس: سه نوع خط</h3>
+    <div class="grid3">
+     <div class="mini" style="text-align:center"><svg viewBox="0 0 120 60" width="100%"><path d="M15 50L105 10" stroke="#159d90" stroke-width="4" stroke-linecap="round"/></svg><strong>خط راست</strong></div>
+     <div class="mini" style="text-align:center"><svg viewBox="0 0 120 60" width="100%"><path d="M15 15L50 50L70 15L105 50" fill="none" stroke="#7666d8" stroke-width="4" stroke-linejoin="round"/></svg><strong>خط شکسته</strong></div>
+     <div class="mini" style="text-align:center"><svg viewBox="0 0 120 60" width="100%"><path d="M15 45C40 -5 70 70 105 15" fill="none" stroke="#ff806b" stroke-width="4"/></svg><strong>خط خمیده</strong></div>
+    </div>
+    <div class="note goldnote">چندضلعی فقط از «خط شکستهٔ بسته» ساخته می‌شود؛ پس شکلی که بخشی از آن منحنی است (مثل نیم‌دایره)، چندضلعی نیست.</div></div>
+   <div class="card"><h3>همه دوران‌های یک هشت‌ضلعی منتظم</h3>
+    <p>حداقل زاویه دوران ۴۵° است و بقیه دوران‌های انطباق، مضرب‌های آن‌اند:</p>
+    <div class="chips"><span>۴۵°</span><span>۹۰°</span><span>۱۳۵°</span><span>۱۸۰°</span><span>۲۲۵°</span><span>۲۷۰°</span><span>۳۱۵°</span><span>۳۶۰°</span></div>
+    <div class="note violetnote">در دوران ۱۸۰° و ۳۶۰° نیازی به تعیین جهت نیست؛ برای بقیه زاویه‌ها باید جهت (ساعت‌گرد یا پادساعت‌گرد) مشخص شود. دوران، شکل را هم‌اندازه و هم‌جهت با شکل اولیه نگه می‌دارد.</div>
+    <p><b>مثال:</b> اگر زاویه خارجی یک nضلعی منتظم ۲۰° باشد، n = ۳۶۰ ÷ ۲۰ = ۱۸ و پس ۱۸ محور تقارن دارد.</p></div>
+  </section>
+
+  <section class="panel" id="lesson2">
+   <div class="section-head"><div><h2>درس دوم: توازی و تعامد</h2><p>رابطه دو خط و زاویه‌های حاصل از برخورد خط مورب</p></div><span class="pill">درس ۲</span></div>
+   <div class="card">
+    <h3>دو خط در صفحه</h3>
+    <div class="grid2">
+     <div class="mini"><div class="visual"><svg viewBox="0 0 200 100" width="100%"><path d="M20 20L180 80M20 80L180 20" stroke="#159d90" stroke-width="4" stroke-linecap="round"/><circle cx="100" cy="50" r="5" fill="#ff806b"/></svg></div><strong>خطوط متقاطع</strong><p>یک نقطه مشترک دارند. اگر زاویه ۹۰ درجه بسازند، بر هم عمودند.</p></div>
+     <div class="mini"><div class="visual"><svg viewBox="0 0 200 100" width="100%"><path d="M20 30H180M20 70H180" stroke="#7666d8" stroke-width="4" stroke-linecap="round"/><path d="M30 23l8 7-8 7M30 63l8 7-8 7" fill="none" stroke="#7666d8" stroke-width="2"/></svg></div><strong>خطوط موازی</strong><p>در یک صفحه هیچ نقطه مشترکی ندارند و با نماد || نشان داده می‌شوند.</p></div>
+    </div>
+   </div>
+   <div class="card">
+    <h3>سه اصل اقلیدس</h3>
+    <p class="hint">با کشیدن دایره‌های رنگی و نوار «چرخش»، شکل را تغییر بده و ببین اصل همیشه درست می‌ماند.</p>
+    <div class="note violetnote"><b>اصل ۱:</b> دو خط موازی با یک خط، با هم موازی‌اند.</div>
+    <div class="formula" style="font-size:18px">a || d , b || d &nbsp;⟹&nbsp; a || b</div>
+    <svg class="dsvg" id="eu1" viewBox="0 0 400 230"></svg>
+    <div class="explorer-controls"><label>چرخش:</label><input type="range" id="t1" min="-40" max="40" value="-12"><b class="range-val" id="t1v"></b></div>
+    <div class="lab-result" id="r1"></div>
+    <div class="note violetnote" style="margin-top:22px"><b>اصل ۲:</b> اگر خطی بر یکی از دو خط موازی عمود شود، بر دیگری نیز عمود است.</div>
+    <div class="formula" style="font-size:18px">d ⊥ a , a || b &nbsp;⟹&nbsp; d ⊥ b</div>
+    <svg class="dsvg" id="eu2" viewBox="0 0 400 230"></svg>
+    <div class="explorer-controls"><label>چرخش:</label><input type="range" id="t2" min="-40" max="40" value="10"><b class="range-val" id="t2v"></b></div>
+    <div class="lab-result" id="r2"></div>
+    <div class="note violetnote" style="margin-top:22px"><b>اصل ۳:</b> دو خط عمود بر یک خط، با هم موازی‌اند.</div>
+    <div class="formula" style="font-size:18px">a ⊥ d , b ⊥ d &nbsp;⟹&nbsp; a || b</div>
+    <svg class="dsvg" id="eu3" viewBox="0 0 400 230"></svg>
+    <div class="explorer-controls"><label>چرخش:</label><input type="range" id="t3" min="-40" max="40" value="-15"><b class="range-val" id="t3v"></b></div>
+    <div class="lab-result" id="r3"></div>
+   </div>
+   <div class="card">
+    <h3>خط مورب و دو خط موازی</h3>
+    <div class="visual">
+     <svg viewBox="0 0 440 220" width="100%">
+      <path d="M35 60H405M35 160H405" stroke="#4b8bd8" stroke-width="4"/>
+      <path d="M145 195L285 20" stroke="#ed806d" stroke-width="4"/>
+      <path d="M283 60A30 30 0 0 0 271.8 36.6" fill="none" stroke="#17a99b" stroke-width="3"/>
+      <path d="M203 160A30 30 0 0 0 191.8 136.6" fill="none" stroke="#17a99b" stroke-width="3"/>
+      <text x="55" y="48" font-size="15" fill="#346b98">a</text><text x="55" y="148" font-size="15" fill="#346b98">b</text><text x="298" y="22" font-size="15" fill="#c85d4d">d</text>
+      <text x="326" y="52" text-anchor="middle" font-size="14" fill="#087d72">زاویه تند</text><text x="268" y="152" text-anchor="middle" font-size="14" fill="#087d72">زاویه تند (برابر)</text>
+      <path d="M45 53l8 7-8 7M45 153l8 7-8 7" stroke="#172b4d" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+     </svg>
+    </div>
+    <div class="note">اگر خط مورب دو خط موازی را قطع کند، زاویه‌های تندِ متناظر و زاویه‌های بازِ متناظر با هم برابرند؛ هر زاویه تند نیز با هر زاویه باز مکمل است.</div>
+   </div>
+   <div class="card">
+    <h3>چند نتیجه مهم درباره خطوط</h3>
+    <ul>
+     <li>دو خط عمود بر یک خط، با هم موازی‌اند.</li>
+     <li>دو خط موازی با یک خط، با هم موازی‌اند.</li>
+     <li>اگر خطی بر یکی از دو خط موازی عمود باشد، بر خط موازی دیگر نیز عمود است.</li>
+     <li>در متوازی‌الاضلاع، ضلع‌های روبه‌رو موازی‌اند؛ زاویه‌های روبه‌رو برابر و زاویه‌های مجاور مکمل‌اند.</li>
+    </ul>
+    <div class="formula">a ⟂ d , b ⟂ d &nbsp; ⟹ &nbsp; a || b</div>
+   </div>
+   <div class="card">
+    <h3>مثال حل‌شده: زاویه‌های مکمل</h3>
+    <p>دو زاویه تند و باز حاصل از برخورد خط مورب با دو خط موازی، به‌ترتیب ۵۵ و x درجه‌اند. x را بیاب.</p>
+    <button class="reveal-btn" onclick="toggleAnswer('a21')">نمایش راه‌حل</button>
+    <div class="answer" id="a21">زاویه تند و باز مکمل‌اند؛ بنابراین مجموعشان ۱۸۰ درجه است:<br><span class="symbol">x + 55 = 180</span><br><span class="symbol">x = 125°</span></div>
+   </div>
+   <div class="card">
+    <h3>تمرین سریع</h3>
+    <p>اگر دو خط موازی با یک خط مورب قطع شوند و یکی از زاویه‌های باز ۱۲۵ درجه باشد، اندازه هر زاویه تند چند درجه است؟</p>
+    <button class="reveal-btn" onclick="toggleAnswer('a22')">بررسی پاسخ</button>
+    <div class="answer" id="a22">۵۵ درجه؛ چون زاویه تند و باز مکمل‌اند: ۱۸۰ − ۱۲۵ = ۵۵.</div>
+   </div>
+   <div class="card"><h3>تکمیل درس: الگوی Z و N</h3>
+    <p>هر جا خطوط موازی و یک مورب را به شکل حرف Z یا N (یا وارونه‌شان) دیدی، دو زاویهٔ داخل حرف با هم برابرند.</p>
+    <div class="visual"><svg viewBox="0 0 300 120" width="100%"><path d="M30 25H130L50 95H150" fill="none" stroke="#7666d8" stroke-width="4" stroke-linejoin="round"/><path d="M108 25A22 22 0 0 0 113.4 39.5" fill="#ffd77a88" stroke="#c68c2e" stroke-width="2"/><path d="M72 95A22 22 0 0 0 66.6 80.5" fill="#ffd77a88" stroke="#c68c2e" stroke-width="2"/><path d="M56 19l8 6-8 6M106 89l8 6-8 6M184 82l6-8 6 8M254 58l6-8 6 8" stroke="#172b4d" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="107" y="48" text-anchor="middle" font-size="14" font-weight="900" fill="#c85d4d">۱</text><text x="78" y="86" text-anchor="middle" font-size="14" font-weight="900" fill="#c85d4d">۲</text><path d="M190 100V25L260 100V25" fill="none" stroke="#17a99b" stroke-width="4" stroke-linejoin="round"/><path d="M190 47A22 22 0 0 0 205 41.1" fill="#ffd77a88" stroke="#c68c2e" stroke-width="2"/><path d="M260 78A22 22 0 0 0 245 83.9" fill="#ffd77a88" stroke="#c68c2e" stroke-width="2"/><text x="203" y="62" text-anchor="middle" font-size="14" font-weight="900" fill="#c85d4d">۳</text><text x="247" y="73" text-anchor="middle" font-size="14" font-weight="900" fill="#c85d4d">۴</text></svg></div>
+    <div class="formula"><bdi dir="ltr">∠۱</bdi> = <bdi dir="ltr">∠۲</bdi></div><div class="formula"><bdi dir="ltr">∠۳</bdi> = <bdi dir="ltr">∠۴</bdi></div></div>
+   <div class="card"><h3>مثال حل‌شده: دو زاویه هم‌طرف</h3>
+    <p>دو خط d₁ || d₂ را خط مورب قطع کرده و دو زاویه هم‌طرف (داخلی) <span class="symbol">3x+10</span> و <span class="symbol">2x+30</span> درجه‌اند. x را بیاب.</p>
+    <button class="reveal-btn" onclick="toggleAnswer('a23')">نمایش راه‌حل</button>
+    <div class="answer" id="a23">این دو زاویه مکمل‌اند:<br><span class="symbol">3x+10+2x+30 = 180</span><br><span class="symbol">5x = 140 → x = 28</span></div></div>
+
+  </section>
+
+  <section class="panel" id="lesson3">
+   <div class="section-head"><div><h2>درس سوم: چهارضلعی‌ها</h2><p>خانواده چهارضلعی‌ها و ویژگی‌های مهم آن‌ها</p></div><span class="pill">درس ۳</span></div>
+   <div class="card">
+    <h3>متوازی‌الاضلاع</h3>
+    <p>چهارضلعی‌ای است که ضلع‌های روبه‌رو دو به دو موازی‌اند.</p>
+    <div class="grid2">
+     <div class="visual"><svg viewBox="0 0 240 160" width="100%"><polygon points="55,35 205,35 175,125 25,125" fill="#c8eee7" stroke="#159d90" stroke-width="3"/><path d="M55 35L175 125M205 35L25 125" stroke="#7666d8" stroke-width="2.5"/><circle cx="115" cy="80" r="4" fill="#ed806d"/><text x="124" y="76" font-size="12">O</text></svg></div>
+     <div>
+      <ul><li>ضلع‌های روبه‌رو برابرند.</li><li>زاویه‌های روبه‌رو برابرند.</li><li>زاویه‌های مجاور مکمل‌اند.</li><li>قطرها یکدیگر را نصف می‌کنند.</li><li>نقطه برخورد قطرها مرکز تقارن است.</li></ul>
+      <div class="note warn">متوازی‌الاضلاع معمولی محور تقارن ندارد؛ قطرهای آن نیز لزوماً برابر یا عمود نیستند.</div>
+     </div>
+    </div>
+   </div>
+   <div class="card">
+    <h3>مستطیل، لوزی و مربع</h3>
+    <div class="table-wrap"><table><thead><tr><th>ویژگی</th><th>مستطیل</th><th>لوزی</th><th>مربع</th></tr></thead><tbody>
+     <tr><td>ضلع‌های روبه‌رو موازی‌اند</td><td>✓</td><td>✓</td><td>✓</td></tr>
+     <tr><td>همه ضلع‌ها برابرند</td><td>خیر</td><td>✓</td><td>✓</td></tr>
+     <tr><td>همه زاویه‌ها قائمه‌اند</td><td>✓</td><td>خیر</td><td>✓</td></tr>
+     <tr><td>قطرها برابرند</td><td>✓</td><td>معمولاً خیر</td><td>✓</td></tr>
+     <tr><td>قطرها عمودند</td><td>معمولاً خیر</td><td>✓</td><td>✓</td></tr>
+     <tr><td>قطرها همدیگر را نصف می‌کنند</td><td>✓</td><td>✓</td><td>✓</td></tr>
+     <tr><td>تعداد محور تقارن</td><td>۲</td><td>۲</td><td>۴</td></tr>
+    </tbody></table></div>
+    <div class="grid3">
+     <div class="mini" style="text-align:center"><svg viewBox="0 0 120 90" width="100%"><rect x="15" y="25" width="90" height="48" fill="#c8eee7" stroke="#159d90" stroke-width="3"/><path d="M15 49H105M60 25V73" stroke="#7666d8" stroke-width="2"/></svg><strong>مستطیل</strong></div>
+     <div class="mini" style="text-align:center"><svg viewBox="0 0 120 90" width="100%"><polygon points="60,8 105,45 60,82 15,45" fill="#ffe2a6" stroke="#c68c2e" stroke-width="3"/><path d="M60 8V82M15 45H105" stroke="#7666d8" stroke-width="2"/></svg><strong>لوزی</strong></div>
+     <div class="mini" style="text-align:center"><svg viewBox="0 0 120 90" width="100%"><rect x="22" y="7" width="76" height="76" fill="#d9d4ff" stroke="#7666d8" stroke-width="3"/><path d="M22 7L98 83M98 7L22 83M60 7V83M22 45H98" stroke="#4b8bd8" stroke-width="1.7"/></svg><strong>مربع</strong></div>
+    </div>
+    <div class="note violetnote">مربع هم‌زمان نوعی مستطیل، نوعی لوزی و نوعی متوازی‌الاضلاع است؛ زیرا ویژگی‌های هر سه را دارد.</div>
+   </div>
+   <div class="card">
+    <h3>ذوزنقه</h3>
+    <p>چهارضلعی‌ای که فقط یک جفت ضلع موازی دارد. دو ضلع موازی را قاعده و دو ضلع دیگر را ساق می‌نامیم.</p>
+    <div class="grid2">
+     <div class="visual"><svg viewBox="0 0 210 135" width="100%"><polygon points="55,25 155,25 190,110 20,110" fill="#ffe2a6" stroke="#c68c2e" stroke-width="3"/><path d="M55 25H155M20 110H190" stroke="#c68c2e" stroke-width="5"/><text x="100" y="17" font-size="12" fill="#8a6222">قاعده</text><text x="100" y="127" font-size="12" fill="#8a6222">قاعده</text></svg></div>
+     <div><ul><li>دو زاویه مجاور به هر ساق مکمل‌اند.</li><li>اگر دو ساق برابر باشند، ذوزنقه متساوی‌الساقین است.</li><li>در ذوزنقه متساوی‌الساقین، زاویه‌های مجاور هر قاعده برابر و قطرها برابرند.</li><li>اگر یک ساق بر قاعده‌ها عمود باشد، ذوزنقه قائم‌الزاویه است.</li></ul></div>
+    </div>
+   </div>
+   <div class="card">
+    <h3>شکل حاصل از وصل کردن وسط ضلع‌ها</h3>
+    <div class="table-wrap"><table><thead><tr><th>شکل اولیه</th><th>شکل حاصل</th></tr></thead><tbody>
+     <tr><td>مربع</td><td>مربع</td></tr><tr><td>مستطیل</td><td>لوزی</td></tr><tr><td>متوازی‌الاضلاع</td><td>متوازی‌الاضلاع</td></tr><tr><td>لوزی</td><td>مستطیل</td></tr>
+    </tbody></table></div>
+   </div>
+   <div class="card">
+    <h3>مثال حل‌شده: زاویه‌های متوازی‌الاضلاع</h3>
+    <p>دو زاویه مجاور یک متوازی‌الاضلاع به‌ترتیب <span class="symbol">3x + 10</span> و <span class="symbol">2x + 20</span> درجه‌اند. x را بیاب.</p>
+    <button class="reveal-btn" onclick="toggleAnswer('a31')">نمایش راه‌حل</button>
+    <div class="answer" id="a31">زاویه‌های مجاور مکمل‌اند:<br><span class="symbol">(3x+10)+(2x+20)=180</span><br><span class="symbol">5x+30=180 → 5x=150 → x=30</span></div>
+   </div>
+   <div class="card"><h3>تکمیل درس: نقشه خانواده چهارضلعی‌ها</h3>
+    <div class="chips"><span>چهارضلعی</span><span>←</span><span>ذوزنقه (یک جفت ضلع موازی)</span><span>←</span><span>متوازی‌الاضلاع (دو جفت)</span></div>
+    <div class="chips"><span>متوازی‌الاضلاع</span><span>←</span><span>مستطیل (زاویه قائمه)</span><span>لوزی (ضلع‌های برابر)</span><span>←</span><span>مربع (هر دو)</span></div>
+    <div class="note goldnote">دو ویژگی که کمتر به یاد می‌مانند: قطرهای <b>مستطیل</b> برابرند ولی عمود نیستند؛ قطرهای <b>لوزی</b> عمودند ولی برابر نیستند. قطرهای ذوزنقه یکدیگر را نصف نمی‌کنند.</div>
+    <p><b>مثال:</b> در متوازی‌الاضلاعی ضلع‌های روبه‌رو <span class="symbol">2x+37</span> و <span class="symbol">3x+19</span> هستند. ضلع‌های روبه‌رو برابرند: 2x+37 = 3x+19 → x = 18.</p></div>
+  </section>
+
+  <section class="panel" id="lesson4">
+   <div class="section-head"><div><h2>درس چهارم: زاویه‌های داخلی</h2><p>از مثلث‌ها تا مجموع زاویه‌های چندضلعی</p></div><span class="pill">درس ۴</span></div>
+   <div class="card">
+    <h3>مجموع زاویه‌های داخلی چندضلعی</h3>
+    <p>با رسم قطرها از یک رأس، چندضلعی به مثلث‌هایی تقسیم می‌شود. تعداد مثلث‌ها دو واحد کمتر از تعداد ضلع‌هاست.</p>
+    <div class="visual"><svg viewBox="0 0 360 180" width="100%">
+     <polygon points="65,35 180,15 300,65 270,145 105,155 35,95" fill="#e5f3ff" stroke="#4b8bd8" stroke-width="3"/>
+     <path d="M65 35L270 145M65 35L105 155M65 35L300 65" stroke="#ed806d" stroke-width="2.5"/>
+     <circle cx="65" cy="35" r="4" fill="#ed806d"/>
+     <text x="170" y="90" font-size="13" fill="#346b98">چهار مثلث</text>
+    </svg></div>
+    <div class="formula">(n − 2) × 180°<small>مجموع زاویه‌های داخلی nضلعی</small></div>
+    <div class="note">این رابطه برای چندضلعی‌های محدب و مقعر نیز برقرار است.</div>
+   </div>
+   <div class="card">
+    <h3>اندازه هر زاویه داخلی چندضلعی منتظم</h3>
+    <p>در چندضلعی منتظم، همه زاویه‌های داخلی برابرند؛ پس مجموع زاویه‌ها را بر تعداد ضلع‌ها تقسیم می‌کنیم.</p>
+    <div class="formula">((n − 2) × 180°) ÷ n<small>اندازه هر زاویه داخلی nضلعی منتظم</small></div>
+    <div class="grid2">
+     <div class="mini"><strong>مثال: هشت‌ضلعی منتظم</strong><p class="symbol">(8−2)×180 = 1080°</p><p class="symbol">1080÷8 = 135°</p></div>
+     <div class="mini"><strong>مثال: شش‌ضلعی منتظم</strong><p class="symbol">(6−2)×180 = 720°</p><p class="symbol">720÷6 = 120°</p></div>
+    </div>
+   </div>
+   <div class="card">
+    <h3>کاشی‌کاری با چندضلعی‌های منتظم</h3>
+    <p>برای کاشی‌کاری، کاشی‌ها باید بدون هم‌پوشانی و بدون فضای خالی کنار هم قرار بگیرند. در هر گوشه، مجموع زاویه‌ها باید ۳۶۰ درجه شود.</p>
+    <div class="grid2">
+     <div class="mini"><div class="visual"><svg viewBox="0 0 180 130" width="100%"><g fill="#b9e9e2" stroke="#15998d" stroke-width="2"><path d="M45 10L85 10L105 45L85 80L45 80L25 45Z"/><path d="M105 45L145 45L165 80L145 115L105 115L85 80Z"/><path d="M-15 45L25 45L45 80L25 115L-15 115L-35 80Z"/></g></svg></div><strong>شش‌ضلعی منتظم</strong><small>زاویه داخلی ۱۲۰°؛ سه زاویه در هر رأس: ۳۶۰°</small></div>
+     <div class="mini"><div class="visual"><svg viewBox="0 0 180 130" width="100%"><g fill="#ffe2a6" stroke="#c68c2e" stroke-width="2"><path d="M90 12L145 52L124 115L56 115L35 52Z"/></g><path d="M90 12L90 115" stroke="#c68c2e" stroke-dasharray="3 3"/></svg></div><strong>پنج‌ضلعی منتظم</strong><small>زاویه داخلی ۱۰۸°؛ ۳۶۰ بر ۱۰۸ بخش‌پذیر نیست.</small></div>
+    </div>
+    <div class="note goldnote">اگر فقط از یک نوع چندضلعی منتظم استفاده کنیم، اندازه زاویه داخلی آن باید مقسوم‌علیه ۳۶۰ درجه باشد.</div>
+   </div>
+   <div class="card">
+    <h3>ماشین‌حساب زاویه داخلی</h3>
+    <div class="explorer-controls"><label for="interiorN">تعداد ضلع‌ها:</label><input id="interiorN" type="number" min="3" max="100" value="10"><button class="primary-btn" onclick="calcInterior()">محاسبه</button></div>
+    <div class="grid2">
+     <div class="mini"><small>مجموع زاویه‌های داخلی</small><div class="formula" id="sumInterior">۱۴۴۰°</div></div>
+     <div class="mini"><small>هر زاویه داخلی در حالت منتظم</small><div class="formula" id="eachInterior">۱۴۴°</div></div>
+    </div>
+   </div>
+   <div class="card"><h3>کاشی‌کاری با چند نوع چندضلعی</h3>
+    <p>سه چندضلعی منتظم را انتخاب کن؛ اگر مجموع زاویه‌های داخلی‌شان دور یک رأس ۳۶۰° شود، کاشی‌کاری ممکن است.</p>
+    <div class="explorer-controls"><select id="vt1" onchange="calcVertex()"></select><select id="vt2" onchange="calcVertex()"></select><select id="vt3" onchange="calcVertex()"></select></div>
+    <div class="formula" id="vtSum"></div><div class="lab-result" id="vtRes"></div>
+    <div class="note goldnote">نمونه معروف: دوازده‌ضلعی + شش‌ضلعی + مربع → ۱۵۰ + ۱۲۰ + ۹۰ = ۳۶۰.</div></div>
+   <div class="card"><h3>ماشین‌حساب معکوس: از مجموع به تعداد ضلع</h3>
+    <p>اگر مجموع زاویه‌های داخلی یک چندضلعی ۹۰۰° باشد: (n−2)×180 = 900 → n−2 = 5 → n = 7.</p></div>
+  </section>
+
+  <section class="panel" id="lesson5">
+   <div class="section-head"><div><h2>درس پنجم: زاویه‌های خارجی</h2><p>چرخش کامل پیرامون چندضلعی</p></div><span class="pill">درس ۵</span></div>
+   <div class="card">
+    <h3>زاویه خارجی چیست؟</h3>
+    <p>در چندضلعی محدب، زاویه‌ای که بین یک ضلع و امتداد ضلع مجاور آن تشکیل می‌شود، زاویه خارجی نام دارد.</p>
+    <div class="visual"><svg viewBox="0 0 320 180" width="100%">
+     <polygon points="70,135 70,45 205,45 250,135" fill="#e3f5ef" stroke="#159d90" stroke-width="3"/>
+     <path d="M70 135H280" stroke="#159d90" stroke-width="3"/>
+     <path d="M70 135L70 15" stroke="#159d90" stroke-width="3"/>
+     <path d="M70 135L112 135" stroke="#ed806d" stroke-width="3"/>
+     <path d="M70 135A48 48 0 0 0 70 87" fill="none" stroke="#ed806d" stroke-width="3"/>
+     <text x="112" y="121" font-size="14" fill="#c85d4d">زاویه خارجی</text>
+     <text x="78" y="70" font-size="14" fill="#346b98">زاویه داخلی</text>
+    </svg></div>
+    <div class="note">هر زاویه داخلی و زاویه خارجی مجاور آن، مکمل‌اند؛ یعنی مجموع آن‌ها ۱۸۰ درجه است.</div>
+   </div>
+   <div class="card">
+    <h3>مجموع زاویه‌های خارجی</h3>
+    <p>اگر یک دور کامل در امتداد محیط هر چندضلعی محدب حرکت کنیم، مجموع چرخش‌ها ۳۶۰ درجه می‌شود.</p>
+    <div class="formula">مجموع زاویه‌های خارجی = ۳۶۰°</div>
+    <div class="formula">هر زاویه خارجی nضلعی منتظم = ۳۶۰° ÷ n</div>
+    <div class="grid2">
+     <div class="mini"><strong>نه‌ضلعی منتظم</strong><p class="symbol">360 ÷ 9 = 40°</p></div>
+     <div class="mini"><strong>دوازده‌ضلعی منتظم</strong><p class="symbol">360 ÷ 12 = 30°</p></div>
+    </div>
+   </div>
+   <div class="card">
+    <h3>یافتن تعداد ضلع‌ها از روی زاویه داخلی</h3>
+    <p>اگر زاویه داخلی یک چندضلعی منتظم معلوم باشد، ابتدا زاویه خارجی را از ۱۸۰ کم می‌کنیم؛ سپس ۳۶۰ را بر آن تقسیم می‌کنیم.</p>
+    <div class="formula">n = ۳۶۰ ÷ (۱۸۰° − زاویه داخلی)</div>
+    <div class="note violetnote">مثال: اگر زاویه داخلی ۱۵۶ درجه باشد، زاویه خارجی ۲۴ درجه است؛ پس n = ۳۶۰ ÷ ۲۴ = ۱۵. شکل، پانزده‌ضلعی منتظم است.</div>
+   </div>
+   <div class="card">
+    <h3>زاویه خارجی مثلث</h3>
+    <p>اندازه هر زاویه خارجی مثلث برابر مجموع دو زاویه داخلی غیرمجاور آن است.</p>
+    <div class="visual"><svg viewBox="0 0 300 180" width="100%">
+     <path d="M55 140L125 35L220 140Z" fill="#e9e5ff" stroke="#7666d8" stroke-width="3"/>
+     <path d="M55 140L260 140" stroke="#7666d8" stroke-width="3"/>
+     <path d="M220 140A38 38 0 0 0 190 108" fill="none" stroke="#ed806d" stroke-width="3"/>
+     <text x="226" y="110" font-size="15" fill="#c85d4d">زاویه خارجی</text>
+     <text x="76" y="125" font-size="14" fill="#4b5e82">A</text><text x="125" y="27" font-size="14" fill="#4b5e82">B</text><text x="215" y="125" font-size="14" fill="#4b5e82">C</text>
+    </svg></div>
+    <div class="formula">زاویه خارجی = زاویه داخلی غیرمجاور اول + زاویه داخلی غیرمجاور دوم</div>
+   </div>
+   <div class="card">
+    <h3>ماشین‌حساب زاویه خارجی</h3>
+    <div class="explorer-controls"><label for="exteriorN">تعداد ضلع‌های چندضلعی منتظم:</label><input id="exteriorN" type="number" min="3" max="100" value="12"><button class="primary-btn" onclick="calcExterior()">محاسبه</button></div>
+    <div class="formula" id="exteriorResult">۳۶۰° ÷ ۱۲ = ۳۰°</div>
+   </div>
+   <div class="card"><h3>اثبات: زاویه خارجی مثلث</h3>
+    <p>ثابت کن در مثلث ABC که A₁ زاویه خارجی رأس A است: A₁ = B + C.</p>
+    <button class="reveal-btn" onclick="toggleAnswer('proof')">گام‌به‌گام ببین</button>
+    <div class="answer" id="proof"><ol class="steps"><li>A₁ و A₂ روی یک خط راست‌اند: <span class="symbol">A₁ + A₂ = 180°</span></li><li>مجموع زاویه‌های داخلی مثلث: <span class="symbol">A₂ + B + C = 180°</span></li><li>دو سمت برابرند: <span class="symbol">A₁ + A₂ = A₂ + B + C</span></li><li>A₂ را از دو طرف حذف می‌کنیم: <b>A₁ = B + C</b> ∎</li></ol></div></div>
+   <div class="card"><h3>راه حرکت لاک‌پشت</h3>
+    <p>لاک‌پشتی دور یک پنج‌ضلعی منتظم راه می‌رود و در هر رأس به اندازهٔ زاویه خارجی (۷۲°) می‌چرخد. وقتی به نقطه شروع برگردد، ۵ × ۷۲ = ۳۶۰° چرخیده است؛ یعنی یک دور کامل.</p></div>
+  </section>
+
+  <section class="panel" id="formula">
+   <div class="section-head"><div><h2>جعبه فرمول‌ها و نکته‌ها</h2><p>مرور سریع پیش از حل تمرین و آزمون</p></div><span class="pill">خلاصه فصل</span></div>
+   <div class="card">
+    <div class="grid2">
+     <div class="mini"><strong>مجموع زاویه‌های داخلی nضلعی</strong><div class="formula">(n−2)×180°</div></div>
+     <div class="mini"><strong>هر زاویه داخلی nضلعی منتظم</strong><div class="formula">((n−2)×180°)÷n</div></div>
+     <div class="mini"><strong>مجموع زاویه‌های خارجی</strong><div class="formula">360°</div></div>
+     <div class="mini"><strong>هر زاویه خارجی nضلعی منتظم</strong><div class="formula">360°÷n</div></div>
+     <div class="mini"><strong>زاویه داخلی و خارجی مجاور</strong><div class="formula">180°</div></div>
+     <div class="mini"><strong>حداقل زاویه دوران منتظم</strong><div class="formula">360°÷n</div></div>
+    </div>
+   </div>
+   <div class="card">
+    <h3>نکته‌های پرتکرار</h3>
+    <ul>
+     <li>چندضلعی منتظم با تعداد ضلع فرد، مرکز تقارن ندارد؛ با تعداد ضلع زوج، مرکز تقارن دارد.</li>
+     <li>تعداد محورهای تقارن nضلعی منتظم برابر تعداد ضلع‌های آن است.</li>
+     <li>در هر متوازی‌الاضلاع، قطرها همدیگر را نصف می‌کنند.</li>
+     <li>در مستطیل، قطرها برابرند؛ در لوزی، قطرها عمودند؛ در مربع هر دو ویژگی برقرار است.</li>
+     <li>در متوازی‌الاضلاع، زاویه‌های روبه‌رو برابر و زاویه‌های مجاور مکمل‌اند.</li>
+     <li>برای کاشی‌کاری با یک نوع چندضلعی منتظم، باید زاویه داخلی آن مقسوم‌علیه ۳۶۰ باشد.</li>
+     <li>مجموع زاویه‌های خارجی هر چندضلعی محدب ۳۶۰ درجه است.</li>
+    </ul>
+   </div>
+  </section>
+
+  <section class="panel" id="lab">
+   <div class="section-head"><div><h2>آزمایشگاه ریاضی</h2><p>حدس بزن، حرکت بده، مشاهده کن و بعد نتیجه را توضیح بده.</p></div><span class="pill">یادگیری اکتشافی</span></div>
+   <div class="card">
+    <h3>آزمایش ۱: آیا این نقطه مرکز تقارن است؟</h3>
+    <p>یک شکل انتخاب کن. نقطهٔ O را در مرکز یا بیرون از مرکز قرار بده و شکل را تا ۱۸۰ درجه بچرخان. اگر تصویر دقیقاً روی شکل اولیه منطبق شود، O مرکز تقارن است.</p>
+    <div class="lab-controls"><label for="symShape">شکل:</label><select id="symShape" onchange="updateSymmetryLab()"><option value="rectangle">مستطیل</option><option value="square">مربع</option><option value="parallelogram">متوازی‌الاضلاع</option><option value="rhombus">لوزی</option><option value="triangle">مثلث متساوی‌الاضلاع</option><option value="pentagon">پنج‌ضلعی منتظم</option><option value="hexagon">شش‌ضلعی منتظم</option></select>
+     <label for="symPoint">جای نقطه O:</label><select id="symPoint" onchange="updateSymmetryLab()"><option value="center">مرکز شکل</option><option value="shift">کمی جابه‌جا از مرکز</option></select></div>
+    <div class="lab-stage"><svg id="symSvg" viewBox="0 0 320 240" role="img" aria-label="آزمایش دوران شکل حول نقطه O"><defs><pattern id="labGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="#dce6ef" stroke-width="1"/></pattern></defs><rect width="320" height="240" fill="url(#labGrid)"/><g id="symOriginal"></g><g id="symRotated"></g><circle id="symCenter" cx="160" cy="120" r="6" fill="#ff806b" stroke="white" stroke-width="2"/><text id="symLabel" x="171" y="113" font-size="13" fill="#c85d4d">O</text></svg></div>
+    <div class="lab-controls"><label for="symAngle">زاویه دوران:</label><input id="symAngle" type="range" min="0" max="180" value="0" oninput="updateSymmetryAngle()"><b class="range-val" id="symAngleVal">۰°</b><button class="primary-btn" onclick="setSymAngle(180)">چرخش ۱۸۰ درجه</button><button class="ghost-btn" onclick="setSymAngle(0)">بازنشانی</button></div>
+    <div class="legend"><span><i class="dot" style="background:#159d90"></i>شکل اولیه</span><span><i class="dot" style="background:#7666d8"></i>تصویر دوران‌یافته</span><span><i class="dot" style="background:#ff806b"></i>نقطه O</span></div>
+    <div class="lab-result" id="symResult">ابتدا شکل و جای نقطه را انتخاب کن، سپس آن را ۱۸۰ درجه بچرخان.</div>
+    <p class="lab-hint">نکته: در این آزمایش، شکل اولیه و تصویر دوران‌یافته هم‌زمان دیده می‌شوند تا میزان انطباق را مقایسه کنی.</p>
+   </div>
+   <div class="card">
+    <h3>آزمایش ۲: مجموع زاویه‌های داخلی از کجا می‌آید؟</h3>
+    <p>تعداد ضلع‌ها را تغییر بده و ببین با رسم قطرها از یک رأس، چند مثلث ساخته می‌شود.</p>
+    <div class="lab-controls"><label for="triangN">تعداد ضلع‌ها:</label><input id="triangN" type="range" min="3" max="10" value="6" oninput="updateTriangulation()"><b class="range-val" id="triangNVal">۶</b></div>
+    <div class="visual"><svg id="triangSvg" viewBox="0 0 320 230" width="100%"></svg></div>
+    <div class="formula" id="triangFormula">(۶ − ۲) × ۱۸۰° = ۷۲۰°</div>
+    <div class="note" id="triangText">شش‌ضلعی از ۴ مثلث تشکیل می‌شود؛ پس مجموع زاویه‌های داخلی آن ۷۲۰ درجه است.</div>
+   </div>
+   <div class="card">
+    <h3>آزمایش ۳: آیا این چندضلعی منتظم کاشی‌کاری می‌کند؟</h3>
+    <p>تعداد ضلع‌ها را تغییر بده. بررسی کن آیا زاویه داخلی شکل، ۳۶۰ درجه را بدون باقی‌مانده پر می‌کند یا نه.</p>
+    <div class="lab-controls"><label for="tileN">تعداد ضلع‌ها:</label><input id="tileN" type="range" min="3" max="12" value="5" oninput="updateTilingLab()"><b class="range-val" id="tileNVal">۵</b></div>
+    <div class="grid2"><div class="mini"><small>هر زاویه داخلی</small><div class="formula" id="tileInterior">۱۰۸°</div></div><div class="mini"><small>تعداد کاشی دور یک نقطه</small><div class="formula" id="tileCount">۳۶۰ ÷ ۱۰۸</div></div></div>
+    <div class="lab-result no" id="tileResult">پنج‌ضلعی منتظم به‌تنهایی صفحه را بدون فاصله و هم‌پوشانی کاشی‌کاری نمی‌کند.</div>
+   </div>
+   <div class="card">
+    <h3>آزمایش ۴: رابطه زاویه‌های داخلی و خارجی</h3>
+    <p>اندازه زاویه داخلی را تغییر بده و ببین زاویه خارجی مجاور چگونه تغییر می‌کند.</p>
+    <div class="lab-controls"><label for="intAngle">زاویه داخلی:</label><input id="intAngle" type="range" min="30" max="170" step="5" value="120" oninput="updateAngleLab()"><b class="range-val" id="intAngleVal">۱۲۰°</b></div>
+    <div class="visual"><svg viewBox="0 0 320 150" width="100%"><path d="M55 115L160 25L275 115" fill="none" stroke="#4b8bd8" stroke-width="4"/><path d="M160 25L305 25" fill="none" stroke="#ff806b" stroke-width="4"/><path d="M160 25L275 115" stroke="#4b8bd8" stroke-width="4"/><text x="160" y="140" text-anchor="middle" font-size="13" fill="#64748b">دو زاویه مجاور روی یک خط راست</text></svg></div>
+    <div class="grid2"><div class="mini"><small>زاویه داخلی</small><div class="formula" id="angleInner">۱۲۰°</div></div><div class="mini"><small>زاویه خارجی</small><div class="formula" id="angleOuter">۶۰°</div></div></div>
+    <div class="note">مجموع هر زاویه داخلی و زاویه خارجیِ مجاور آن برابر ۱۸۰ درجه است.</div>
+   </div>
+   <div class="card">
+    <h3>آزمایش ۵: خط مورب، خطوط موازی و زاویه‌ها</h3>
+    <p>اندازه یکی از زاویه‌های تند را تغییر بده. زاویه متناظر و زاویه مجاور آن را با هم مقایسه کن.</p>
+    <div class="lab-controls"><label for="parallelAngle">زاویه تند:</label><input id="parallelAngle" type="range" min="20" max="85" value="55" oninput="updateParallelLab()"><b class="range-val" id="parallelAngleVal">۵۵°</b></div>
+    <div class="visual"><svg id="pSvg" viewBox="0 0 360 190" width="100%"></svg></div>
+    <div class="grid2"><div class="mini"><small>زاویه تند متناظر</small><div class="formula" id="parallelAcute">۵۵°</div></div><div class="mini"><small>زاویه باز مجاور</small><div class="formula" id="parallelObtuse">۱۲۵°</div></div></div>
+    <div class="note">وقتی دو خط موازی با یک خط مورب قطع می‌شوند، زاویه‌های تند متناظر با هم برابرند و زاویه تند و باز مجاور مکمل‌اند.</div>
+   </div>
+   <div class="card">
+    <h3>آزمایش ۶: قطرهای چهارضلعی‌ها چه ویژگی‌ای دارند؟</h3>
+    <p>نوع چهارضلعی را انتخاب کن و ویژگی قطرهای آن را مقایسه کن.</p>
+    <div class="lab-controls"><label for="quadChoice">چهارضلعی:</label><select id="quadChoice" onchange="updateQuadLab()"><option value="parallelogram">متوازی‌الاضلاع معمولی</option><option value="rectangle">مستطیل</option><option value="rhombus">لوزی</option><option value="square">مربع</option></select></div>
+    <div class="visual"><svg id="quadSvg" viewBox="0 0 320 190" width="100%"></svg></div>
+    <div class="note" id="quadFacts">قطرها یکدیگر را نصف می‌کنند؛ اما لزوماً برابر یا عمود نیستند.</div>
+   </div>
+   <div class="card"><h3>آزمایش ۷: همه زاویه‌های مورب را ببین</h3>
+    <p>زاویهٔ خط مورب را تغییر بده. زاویه‌های هم‌رنگ برابرند و رنگ‌های متفاوت مکمل‌اند (مجموع ۱۸۰°).</p>
+    <svg class="dsvg" id="s7" viewBox="0 0 400 240"></svg>
+    <div class="explorer-controls"><label>زاویهٔ مورب:</label><input type="range" id="t7" min="25" max="155" value="60"><b class="range-val" id="t7v"></b></div></div>
+   <div class="card"><h3>آزمایش ۸: زاویهٔ خارجی مثلث</h3>
+    <p>سه رأس را بکش. هر شکلی بسازی، زاویهٔ خارجی رأس C برابر مجموع دو زاویهٔ داخلی غیرمجاور (A و B) می‌ماند!</p>
+    <svg class="dsvg" id="s8" viewBox="0 0 400 240"><polygon id="tri8" fill="#17a99b22" stroke="#159d90" stroke-width="3"/><path id="ext8" stroke="#ed806d" stroke-width="3" stroke-dasharray="6 4"/><circle id="A8" cx="120" cy="50" r="13" fill="#ff806b"/><circle id="B8" cx="60" cy="190" r="13" fill="#7666d8"/><circle id="C8" cx="260" cy="190" r="13" fill="#17a99b"/><text id="tA8" font-size="14">A</text><text id="tB8" font-size="14">B</text><text id="tC8" font-size="14">C</text></svg>
+    <div class="formula" id="r8" style="font-size:17px"></div></div>
+  </section>
+
+  <section class="panel" id="game">
+   <div class="section-head"><div><h2>چالش و بازی</h2><p>هر پاسخ درست امتیاز می‌دهد؛ ببین چند ستاره جمع می‌کنی!</p></div><span class="pill">★ بازی</span></div>
+   <div class="tabs"><button class="reveal-btn on" data-gp="g1">درست یا نادرست</button><button class="reveal-btn" data-gp="g2">مسئله‌ساز</button><button class="reveal-btn" data-gp="g3">جای خالی</button></div>
+   <div class="card gp show" id="g1"><h3>درست یا نادرست؟ (+۱ امتیاز)</h3><div id="tfArea"></div></div>
+   <div class="card gp" id="g2"><h3>مسئله‌ساز: هر بار یک مسئله تازه (+۳ امتیاز)</h3>
+    <div class="mission"><p id="rpText"></p><input type="text" id="rpIn" inputmode="numeric" placeholder="پاسخ"> <button class="primary-btn" onclick="checkRp()">بررسی</button> <button class="ghost-btn" onclick="newRp()">مسئله بعدی</button><div class="answer" id="rpSol"></div><div id="rpMsg" style="font-weight:800;margin-top:8px"></div></div></div>
+   <div class="card gp" id="g3"><h3>جاهای خالی (+۲ امتیاز)</h3><div id="fbArea"></div></div>
+  </section>
+
+  <section class="panel" id="practice">
+   <div class="section-head"><div><h2>تمرین و آزمون خودسنجی</h2><p>سؤال‌ها از تیپ‌های نمونه‌سؤال فصل سوم انتخاب شده‌اند.</p></div><span class="pill">خودت را بسنج</span></div>
+   <div class="card">
+    <div class="quiz-tools"><div><strong>آزمون چهارگزینه‌ای</strong><div style="font-size:12px;color:var(--muted)">۲۰ سؤال تصادفی از بانک سؤال · هر سؤال یک امتیاز</div></div><button class="ghost-btn" onclick="restartQuiz()">شروع دوباره</button></div>
+    <div class="progress"><span id="progressBar"></span></div>
+    <div id="quizArea"></div>
+    <div class="scorebox" id="scoreBox"><div>نتیجه آزمون تو</div><div class="score-num" id="scoreNum">۰ از ۲۰</div><div id="scoreText"></div><button class="primary-btn" onclick="restartQuiz()">دوباره تمرین می‌کنم</button></div>
+    <div class="quiz-tools"><span id="answeredText" style="font-size:12px;color:var(--muted)">پاسخ داده‌شده: ۰ از ۲۰</span><button class="primary-btn" id="submitQuiz" onclick="submitQuiz()">ثبت پاسخ‌ها و دیدن نتیجه</button></div>
+   </div>
+  </section>
+ </main>
+</div>
+<div class="footer">ریاضی هشتم · فصل سوم: چندضلعی‌ها | درسنامه تعاملی آفلاین</div>
+
+<script>
+const faDigits=s=>String(s).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+function showPanel(id){
+ document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));
+ document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.panel===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.nav-btn').forEach(b=>b.addEventListener('click',()=>showPanel(b.dataset.panel)));
+function toggleAnswer(id){document.getElementById(id).classList.toggle('show')}
+
+const symmetryShapes={
+ rectangle:{pts:[[-75,-45],[75,-45],[75,45],[-75,45]],center:true},square:{pts:[[-58,-58],[58,-58],[58,58],[-58,58]],center:true},
+ parallelogram:{pts:[[-75,-42],[55,-42],[75,42],[-55,42]],center:true},rhombus:{pts:[[0,-75],[62,0],[0,75],[-62,0]],center:true},
+ triangle:{pts:[[0,-82],[71,41],[-71,41]],center:false},pentagon:{pts:Array.from({length:5},(_,i)=>[72*Math.cos(-Math.PI/2+i*2*Math.PI/5),72*Math.sin(-Math.PI/2+i*2*Math.PI/5)]),center:false},
+ hexagon:{pts:Array.from({length:6},(_,i)=>[70*Math.cos(-Math.PI/2+i*2*Math.PI/6),70*Math.sin(-Math.PI/2+i*2*Math.PI/6)]),center:true}
+};
+function shapePoints(pts,cx=160,cy=120){return pts.map(p=>`${cx+p[0]},${cy+p[1]}`).join(' ')}
+function updateSymmetryLab(){
+ const name=document.getElementById('symShape').value,loc=document.getElementById('symPoint').value,sh=symmetryShapes[name];
+ const cx=loc==='center'?160:195,cy=120;
+ document.getElementById('symOriginal').innerHTML=`<polygon points="${shapePoints(sh.pts)}" fill="#17a99b22" stroke="#159d90" stroke-width="3" stroke-linejoin="round"/>`;
+ document.getElementById('symCenter').setAttribute('cx',cx);document.getElementById('symCenter').setAttribute('cy',cy);
+ document.getElementById('symLabel').setAttribute('x',cx+10);document.getElementById('symLabel').setAttribute('y',cy-10);
+ updateSymmetryAngle();
+}
+function updateSymmetryAngle(){
+ const a=+document.getElementById('symAngle').value;document.getElementById('symAngleVal').textContent=faDigits(a)+'°';
+ const name=document.getElementById('symShape').value,loc=document.getElementById('symPoint').value,sh=symmetryShapes[name];
+ const cx=loc==='center'?160:195,cy=120;
+ document.getElementById('symRotated').innerHTML=`<polygon points="${shapePoints(sh.pts)}" transform="rotate(${a} ${cx} ${cy})" fill="#7666d822" stroke="#7666d8" stroke-width="3" stroke-dasharray="6 3" stroke-linejoin="round"/>`;
+ const result=document.getElementById('symResult');
+ if(a===180){const yes=sh.center&&loc==='center';result.className='lab-result'+(yes?'':' no');result.textContent=yes?'آفرین! تصویر دقیقاً بر شکل اولیه منطبق شد؛ پس این نقطه مرکز تقارن شکل است.':'تصویر بر شکل اولیه منطبق نشد؛ پس این نقطه مرکز تقارن این شکل نیست.'}
+ else{result.className='lab-result';result.textContent='زاویه را تا ۱۸۰ درجه افزایش بده و میزان انطباق دو شکل را بررسی کن.'}
+}
+function setSymAngle(a){document.getElementById('symAngle').value=a;updateSymmetryAngle()}
+function updateTriangulation(){
+ const n=+document.getElementById('triangN').value;document.getElementById('triangNVal').textContent=faDigits(n);
+ const pts=Array.from({length:n},(_,i)=>[160+88*Math.cos(-Math.PI/2+i*2*Math.PI/n),112+88*Math.sin(-Math.PI/2+i*2*Math.PI/n)]);
+ let svg=`<polygon points="${pts.map(p=>p.join(',')).join(' ')}" fill="#dff7f2" stroke="#159d90" stroke-width="3"/>`;
+ for(let i=2;i<n-1;i++)svg+=`<path d="M${pts[0][0]} ${pts[0][1]}L${pts[i][0]} ${pts[i][1]}" stroke="#7666d8" stroke-width="2" stroke-dasharray="5 4"/>`;
+ document.getElementById('triangSvg').innerHTML=svg;
+ const t=n-2,sum=t*180;document.getElementById('triangFormula').textContent=`(${faDigits(n)} − ۲) × ۱۸۰° = ${faDigits(sum)}°`;
+ document.getElementById('triangText').textContent=`با رسم قطرها از یک رأس، ${faDigits(t)} مثلث ساخته می‌شود؛ پس مجموع زاویه‌های داخلی ${faDigits(n)}ضلعی برابر ${faDigits(sum)} درجه است.`;
+}
+function updateTilingLab(){
+ const n=+document.getElementById('tileN').value;document.getElementById('tileNVal').textContent=faDigits(n);
+ const angle=(n-2)*180/n,ratio=360/angle;document.getElementById('tileInterior').textContent=faDigits(Number(angle.toFixed(2)))+'°';
+ document.getElementById('tileCount').textContent=`۳۶۰ ÷ ${faDigits(Number(angle.toFixed(2)))}`;
+ const ok=Math.abs(ratio-Math.round(ratio))<1e-9;const el=document.getElementById('tileResult');el.className='lab-result'+(ok?'':' no');
+ el.textContent=ok?`بله؛ ${faDigits(Math.round(ratio))} زاویه از این نوع دقیقاً دور یک نقطه را پر می‌کنند.`:'خیر؛ چون ۳۶۰ بر زاویه داخلی این چندضلعی بخش‌پذیر نیست و اطراف یک نقطه بدون فاصله یا هم‌پوشانی پر نمی‌شود.';
+}
+function updateAngleLab(){const a=+document.getElementById('intAngle').value,b=180-a;document.getElementById('intAngleVal').textContent=faDigits(a)+'°';document.getElementById('angleInner').textContent=faDigits(a)+'°';document.getElementById('angleOuter').textContent=faDigits(b)+'°'}
+
+
+function updateParallelLab(){const a=+document.getElementById('parallelAngle').value;document.getElementById('parallelAngleVal').textContent=faDigits(a)+'°';document.getElementById('parallelAcute').textContent=faDigits(a)+'°';document.getElementById('parallelObtuse').textContent=faDigits(180-a)+'°';
+ const r=a*Math.PI/180,c=Math.cos(r),s=Math.sin(r),P=[[180+50*c/s,45],[180-50*c/s,145]];
+ let h='<path d="M15 45H345M15 145H345" stroke="#4b8bd8" stroke-width="4"/><path d="M'+P[0]+'L'+P[1]+'" stroke="#ed806d" stroke-width="4" stroke-linecap="round"/><path d="M50 38l8 7-8 7M50 138l8 7-8 7" stroke="#172b4d" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="22" y="36" font-size="14" fill="#346b98">a</text><text x="22" y="136" font-size="14" fill="#346b98">b</text>';
+ const pl=(m,R)=>[Math.cos(m)*R,-Math.sin(m)*R];
+ P.forEach((p,i)=>{const e=pl(r,26);h+=`<path d="M${p[0]+26} ${p[1]}A26 26 0 0 0 ${p[0]+e[0]} ${p[1]+e[1]}L${p[0]} ${p[1]}Z" fill="#17a99b44" stroke="#159d90" stroke-width="2"/>`;
+  const t=pl(r/2,44);h+=`<text x="${p[0]+t[0]+4}" y="${p[1]+t[1]+5}" text-anchor="middle" font-size="12" font-weight="900" fill="#087d72">${faDigits(a)}°</text>`;
+  const o=pl((r+Math.PI)/2,40);h+=`<text x="${p[0]+o[0]}" y="${p[1]+o[1]+5}" text-anchor="middle" font-size="12" font-weight="900" fill="#c85d4d">${faDigits(180-a)}°</text>`});
+ document.getElementById('pSvg').innerHTML=h}
+function updateQuadLab(){
+ const type=document.getElementById('quadChoice').value;
+ const shapes={parallelogram:{pts:'75,45 250,45 285,135 110,135',facts:'قطرها یکدیگر را نصف می‌کنند؛ اما در حالت معمول نه برابرند و نه بر هم عمود.'},rectangle:{pts:'75,45 255,45 255,135 75,135',facts:'قطرها با هم برابرند و یکدیگر را نصف می‌کنند.'},rhombus:{pts:'160,25 260,90 160,155 60,90',facts:'قطرها بر هم عمودند و یکدیگر را نصف می‌کنند؛ اما لزوماً برابر نیستند.'},square:{pts:'95,25 225,25 225,155 95,155',facts:'قطرها با هم برابرند، بر هم عمودند و یکدیگر را نصف می‌کنند.'}};
+ const sh=shapes[type],p=sh.pts.split(' ').map(v=>v.split(',').map(Number));
+ document.getElementById('quadSvg').innerHTML=`<polygon points="${sh.pts}" fill="#dff7f2" stroke="#159d90" stroke-width="3"/><path d="M${p[0]}L${p[2]}M${p[1]}L${p[3]}" stroke="#7666d8" stroke-width="3"/><circle cx="160" cy="90" r="4" fill="#ff806b"/>`;
+ document.getElementById('quadFacts').textContent=sh.facts;
+}
+
+function updatePolygon(){
+ const n=+document.getElementById('polyN').value;
+ document.getElementById('polyNVal').textContent=faDigits(n);
+ const cx=120,cy=98,r=75,pts=[];
+ for(let i=0;i<n;i++){let a=-Math.PI/2+2*Math.PI*i/n;pts.push(`${cx+r*Math.cos(a)},${cy+r*Math.sin(a)}`)}
+ const svg=document.getElementById('polySvg');
+ svg.innerHTML=`<polygon points="${pts.join(' ')}" fill="#d9f2ed" stroke="#159d90" stroke-width="3"/>`+
+ `<circle cx="${cx}" cy="${cy}" r="4" fill="#ed806d"/>`+
+ `<path d="M${cx} ${cy}L${pts[0]}" stroke="#7666d8" stroke-width="2" stroke-dasharray="4 4"/>`+
+ `<text x="128" y="92" font-size="12" fill="#172b4d">O</text>`;
+ const deg=360/n;
+ document.getElementById('polyAngle').textContent=`۳۶۰° ÷ ${faDigits(n)} = ${faDigits(Number(deg.toFixed(2)))}°`;
+ document.getElementById('polyText').textContent=`${faDigits(n)}‌ضلعی منتظم با دوران ${faDigits(Number(deg.toFixed(2)))} درجه بر خودش منطبق می‌شود و ${faDigits(n)} محور تقارن دارد.`;
+}
+function calcInterior(){
+ const n=+document.getElementById('interiorN').value;
+ if(!Number.isInteger(n)||n<3||n>100){alert('تعداد ضلع باید عددی بین ۳ تا ۱۰۰ باشد.');return}
+ const sum=(n-2)*180,each=sum/n;
+ document.getElementById('sumInterior').textContent=faDigits(sum)+'°';
+ document.getElementById('eachInterior').textContent=faDigits(Number(each.toFixed(2)))+'°';
+}
+function calcExterior(){
+ const n=+document.getElementById('exteriorN').value;
+ if(!Number.isInteger(n)||n<3||n>100){alert('تعداد ضلع باید عددی بین ۳ تا ۱۰۰ باشد.');return}
+ document.getElementById('exteriorResult').textContent=`۳۶۰° ÷ ${faDigits(n)} = ${faDigits(Number((360/n).toFixed(2)))}°`;
+}
+const questionsBank=[
+ {id:1,q:'کدام عبارت درباره متوازی‌الاضلاع معمولی درست است؟',o:['قطرها همیشه برابرند','قطرها یکدیگر را نصف می‌کنند','قطرها همیشه عمودند','یک محور تقارن دارد'],a:1,e:'در هر متوازی‌الاضلاع قطرها یکدیگر را نصف می‌کنند؛ اما لزوماً برابر یا عمود نیستند.'},
+ {id:2,q:'کدام شکل محور تقارن دارد اما مرکز تقارن ندارد؟',o:['مستطیل','متوازی‌الاضلاع معمولی','مثلث متساوی‌الساقین','لوزی'],a:2,e:'مثلث متساوی‌الساقین یک محور تقارن دارد، ولی مرکز تقارن ندارد.'},
+ {id:3,q:'یک هفت‌ضلعی منتظم چند محور تقارن دارد؟',o:['۵','۶','۷','۱۴'],a:2,e:'در چندضلعی منتظم تعداد محورهای تقارن برابر تعداد ضلع‌هاست.'},
+ {id:4,q:'کدام چندضلعی منتظم مرکز تقارن دارد؟',o:['پنج‌ضلعی','هفت‌ضلعی','نه‌ضلعی','هشت‌ضلعی'],a:3,e:'چندضلعی منتظم با تعداد ضلع زوج مرکز تقارن دارد.'},
+ {id:5,q:'حداقل زاویه دوران یک شش‌ضلعی منتظم چند درجه است؟',o:['۳۰','۴۵','۶۰','۹۰'],a:2,e:'۳۶۰ ÷ ۶ = ۶۰ درجه.'},
+ {id:6,q:'اگر دو خط بر یک خط واحد عمود باشند، نسبت به هم چه وضعی دارند؟',o:['متقاطع‌اند','موازی‌اند','منطبق‌اند','همیشه عمودند'],a:1,e:'دو خط عمود بر یک خط، با هم موازی‌اند.'},
+ {id:7,q:'اگر یک زاویه از دو زاویه مکمل ۱۲۵ درجه باشد، زاویه دیگر چند درجه است؟',o:['۴۵','۵۵','۶۵','۷۵'],a:1,e:'۱۸۰ − ۱۲۵ = ۵۵ درجه.'},
+ {id:8,q:'مجموع زاویه‌های داخلی یک شش‌ضلعی چند درجه است؟',o:['۵۴۰','۶۰۰','۷۲۰','۹۰۰'],a:2,e:'(۶−۲)×۱۸۰ = ۷۲۰ درجه.'},
+ {id:9,q:'اندازه هر زاویه داخلی یک هشت‌ضلعی منتظم چند درجه است؟',o:['۱۲۰','۱۳۵','۱۴۰','۱۵۰'],a:1,e:'(۸−۲)×۱۸۰ ÷ ۸ = ۱۳۵ درجه.'},
+ {id:10,q:'اندازه هر زاویه خارجی یک نه‌ضلعی منتظم چقدر است؟',o:['۳۰','۳۶','۴۰','۴۵'],a:2,e:'۳۶۰ ÷ ۹ = ۴۰ درجه.'},
+ {id:11,q:'اگر زاویه داخلی یک چندضلعی منتظم ۱۵۰ درجه باشد، چند ضلع دارد؟',o:['۱۰','۱۱','۱۲','۱۵'],a:2,e:'زاویه خارجی ۳۰ درجه است؛ ۳۶۰ ÷ ۳۰ = ۱۲.'},
+ {id:12,q:'مجموع زاویه‌های خارجی هر چندضلعی محدب چقدر است؟',o:['۱۸۰','۲۷۰','۳۶۰','۵۴۰'],a:2,e:'مجموع زاویه‌های خارجی هر چندضلعی محدب ۳۶۰ درجه است.'},
+ {id:13,q:'کدام چهارضلعی قطرهای برابر و عمود بر هم دارد؟',o:['مستطیل','لوزی','مربع','متوازی‌الاضلاع معمولی'],a:2,e:'قطرهای مربع هم برابرند و هم بر هم عمودند.'},
+ {id:14,q:'در کدام شکل قطرها بر هم عمودند ولی لزوماً برابر نیستند؟',o:['مستطیل','لوزی','متوازی‌الاضلاع معمولی','ذوزنقه معمولی'],a:1,e:'در لوزی قطرها بر هم عمودند؛ اما معمولاً برابر نیستند.'},
+ {id:15,q:'اگر وسط‌های ضلع‌های یک مستطیل را به ترتیب به هم وصل کنیم، چه شکلی به‌وجود می‌آید؟',o:['مربع','لوزی','ذوزنقه','مثلث'],a:1,e:'شکل حاصل لوزی است.'},
+ {id:16,q:'اگر وسط‌های ضلع‌های یک لوزی را به ترتیب به هم وصل کنیم، چه شکلی به‌وجود می‌آید؟',o:['مستطیل','مربع همیشه','پنج‌ضلعی','ذوزنقه'],a:0,e:'شکل حاصل مستطیل است.'},
+ {id:17,q:'اندازه هر زاویه خارجی یک دوازده‌ضلعی منتظم چقدر است؟',o:['۲۰','۲۵','۳۰','۳۶'],a:2,e:'۳۶۰ ÷ ۱۲ = ۳۰ درجه.'},
+ {id:18,q:'کدام شکل به تنهایی برای کاشی‌کاری مناسب نیست؟',o:['مثلث متساوی‌الاضلاع','مربع','شش‌ضلعی منتظم','پنج‌ضلعی منتظم'],a:3,e:'زاویه داخلی پنج‌ضلعی منتظم ۱۰۸ درجه است و ۳۶۰ بر ۱۰۸ بخش‌پذیر نیست.'},
+ {id:19,q:'در هر متوازی‌الاضلاع، زاویه‌های روبه‌رو چه رابطه‌ای دارند؟',o:['مکمل‌اند','برابرند','مجموعشان ۹۰ است','همیشه قائمه‌اند'],a:1,e:'زاویه‌های روبه‌رو در متوازی‌الاضلاع برابرند.'},
+ {id:20,q:'اگر زاویه داخلی یک چندضلعی منتظم ۱۰۸ درجه باشد، شکل چند ضلع دارد؟',o:['۵','۶','۸','۱۰'],a:0,e:'زاویه خارجی ۷۲ درجه است؛ ۳۶۰ ÷ ۷۲ = ۵.'}
+,
+ {id:21,q:'کدام تعریف برای چندضلعی درست است؟',o:['خط شکسته باز','خط شکسته بسته که ضلع‌ها فقط در رأس‌ها به هم برسند','هر خط خمیده بسته','هر شکل دارای سه ضلع'],a:1,e:'چندضلعی خط شکسته بسته‌ای است که ضلع‌ها جز در رأس‌ها یکدیگر را قطع نکنند.'},
+ {id:22,q:'کدام ویژگی درباره چندضلعی مقعر درست است؟',o:['همه زاویه‌هایش کمتر از ۱۸۰ درجه‌اند','حداقل یک زاویه داخلی بزرگ‌تر از ۱۸۰ درجه دارد','همه ضلع‌هایش برابرند','حتماً مرکز تقارن دارد'],a:1,e:'در چندضلعی مقعر دست‌کم یک زاویه داخلی بزرگ‌تر از ۱۸۰ درجه است.'},
+ {id:23,q:'کدام شرط برای منتظم بودن یک چندضلعی لازم است؟',o:['فقط ضلع‌ها برابر باشند','فقط زاویه‌ها برابر باشند','همه ضلع‌ها و همه زاویه‌ها برابر باشند','قطرها برابر باشند'],a:2,e:'در چندضلعی منتظم همۀ ضلع‌ها و همۀ زاویه‌ها با هم برابرند.'},
+ {id:24,q:'یک ده‌ضلعی منتظم چند محور تقارن دارد؟',o:['۵','۸','۱۰','۲۰'],a:2,e:'تعداد محورهای تقارن چندضلعی منتظم برابر تعداد ضلع‌های آن است.'},
+ {id:25,q:'کدام شکل مرکز تقارن دارد ولی محور تقارن ندارد؟',o:['مثلث متساوی‌الساقین','متوازی‌الاضلاع معمولی','پنج‌ضلعی منتظم','نیم‌دایره'],a:1,e:'متوازی‌الاضلاع معمولی مرکز تقارن دارد، اما محور تقارن ندارد.'},
+ {id:26,q:'اگر شکل پس از دوران ۱۸۰ درجه حول نقطه‌ای بر خودش منطبق شود، آن نقطه چیست؟',o:['رأس','محور تقارن','مرکز تقارن','مرکز ثقل لزوماً'],a:2,e:'این همان تعریف مرکز تقارن در درسنامه است.'},
+ {id:27,q:'حداقل زاویه دوران یک هشت‌ضلعی منتظم چقدر است؟',o:['۳۰°','۴۵°','۶۰°','۹۰°'],a:1,e:'۳۶۰ ÷ ۸ = ۴۵ درجه.'},
+ {id:29,q:'اگر دو خط موازی با یک خط باشند، نسبت به یکدیگر چه وضعی دارند؟',o:['عمودند','متقاطع‌اند','موازی‌اند','منطبق‌اند'],a:2,e:'دو خط موازی با یک خط، با هم موازی‌اند.'},
+ {id:30,q:'اگر خطی بر یکی از دو خط موازی عمود باشد، با خط موازی دیگر چه رابطه‌ای دارد؟',o:['موازی است','عمود است','متقاطع با زاویه ۴۵ درجه است','هیچ نتیجه‌ای ندارد'],a:1,e:'اگر خطی بر یکی از دو خط موازی عمود باشد، بر دیگری نیز عمود خواهد بود.'},
+ {id:31,q:'در متوازی‌الاضلاع، ضلع‌های روبه‌رو چه رابطه‌ای دارند؟',o:['فقط برابرند','فقط موازی‌اند','هم موازی و هم برابرند','عمودند'],a:2,e:'ضلع‌های روبه‌رو در متوازی‌الاضلاع هم موازی و هم برابرند.'},
+ {id:32,q:'کدام ویژگی در مستطیل برقرار است؟',o:['قطرها بر هم عمودند','قطرها برابرند و یکدیگر را نصف می‌کنند','همه ضلع‌ها برابرند','فقط یک قطر دارد'],a:1,e:'قطرهای مستطیل با هم برابرند و یکدیگر را نصف می‌کنند.'},
+ {id:33,q:'کدام ویژگی لوزی را از مستطیل معمولی متمایز می‌کند؟',o:['قطرها یکدیگر را نصف می‌کنند','قطرها بر هم عمودند','زاویه‌های روبه‌رو برابرند','ضلع‌های روبه‌رو موازی‌اند'],a:1,e:'در لوزی قطرها بر هم عمودند؛ در مستطیل معمولی لزوماً چنین نیست.'},
+ {id:34,q:'کدام چهارضلعی هم مستطیل و هم لوزی است؟',o:['ذوزنقه','متوازی‌الاضلاع معمولی','مربع','لوزی غیرمربع'],a:2,e:'مربع هم چهار زاویه قائمه دارد و هم چهار ضلع برابر.'},
+ {id:35,q:'مجموع زاویه‌های داخلی یک پنج‌ضلعی چند درجه است؟',o:['۳۶۰','۵۴۰','۷۲۰','۹۰۰'],a:1,e:'(۵−۲)×۱۸۰ = ۵۴۰ درجه.'},
+ {id:36,q:'اگر مجموع زاویه‌های داخلی یک چندضلعی ۹۰۰ درجه باشد، چند ضلع دارد؟',o:['۶','۷','۸','۹'],a:1,e:'(n−۲)×۱۸۰=۹۰۰، پس n−۲=۵ و n=۷.'},
+ {id:37,q:'هر زاویه داخلی یک شش‌ضلعی منتظم چند درجه است؟',o:['۱۰۰','۱۲۰','۱۳۵','۱۴۰'],a:1,e:'(۶−۲)×۱۸۰ ÷ ۶ = ۱۲۰ درجه.'},
+ {id:38,q:'اگر زاویه خارجی یک چندضلعی منتظم ۴۵ درجه باشد، چند ضلع دارد؟',o:['۶','۷','۸','۹'],a:2,e:'۳۶۰ ÷ ۴۵ = ۸ ضلع.'},
+ {id:39,q:'در هر رأس چندضلعی محدب، زاویه داخلی و زاویه خارجی مجاور چه رابطه‌ای دارند؟',o:['برابرند','مجموعشان ۹۰ درجه است','مکمل‌اند','متقابل به رأس‌اند'],a:2,e:'مجموع زاویه داخلی و خارجی مجاور برابر ۱۸۰ درجه است.'},
+ {id:40,q:'در یک مثلث، زاویه خارجی برابر مجموع کدام زاویه‌هاست؟',o:['سه زاویه داخلی','دو زاویه داخلی غیرمجاور','دو زاویه مجاور','نصف زاویه داخلی'],a:1,e:'زاویه خارجی مثلث برابر مجموع دو زاویه داخلی غیرمجاور آن است.'}
+];
+const QUIZ_SIZE=20;
+let questions=[];
+let answers=[];
+function loadFreshQuestionSet(){
+ const key='riazi8_ch3_recent_question_ids_v2';
+ let previous=[];
+ try{previous=JSON.parse(localStorage.getItem(key)||'[]')}catch(e){}
+ let pool=questionsBank.slice();
+ let fresh=pool.filter(q=>!previous.includes(q.id));
+ if(fresh.length<QUIZ_SIZE) fresh=pool.slice();
+ for(let i=fresh.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[fresh[i],fresh[j]]=[fresh[j],fresh[i]]}
+ questions=fresh.slice(0,QUIZ_SIZE);
+ try{localStorage.setItem(key,JSON.stringify(questions.map(q=>q.id)))}catch(e){}
+ answers=Array(questions.length).fill(null);
+}
+function renderQuiz(){
+ const area=document.getElementById('quizArea');area.innerHTML='';
+ questions.forEach((q,i)=>{
+  const box=document.createElement('div');box.className='quiz-q';box.id='q'+i;
+  const h=document.createElement('h4');h.textContent=(i+1)+'. '+q.q;box.appendChild(h);
+  const opts=document.createElement('div');opts.className='options';
+  q.o.forEach((op,j)=>{
+   const b=document.createElement('button');b.className='opt';b.textContent='('+['الف','ب','ج','د'][j]+') '+op;
+   b.onclick=()=>choose(i,j);b.id=`o${i}_${j}`;opts.appendChild(b);
+  });
+  box.appendChild(opts);
+  const f=document.createElement('div');f.className='feedback';f.id='f'+i;box.appendChild(f);
+  area.appendChild(box);
+ });
+ updateProgress();
+}
+function choose(i,j){
+ if(document.getElementById('scoreBox').classList.contains('show'))return;
+ answers[i]=j;
+ questions[i].o.forEach((_,k)=>document.getElementById(`o${i}_${k}`).classList.toggle('selected',k===j));
+ updateProgress();
+}
+function updateProgress(){
+ const n=answers.filter(x=>x!==null).length;
+ document.getElementById('answeredText').textContent=`پاسخ داده‌شده: ${faDigits(n)} از ${faDigits(questions.length)}`;
+ document.getElementById('progressBar').style.width=(n/questions.length*100)+'%';
+}
+function submitQuiz(){
+ const n=answers.filter(x=>x!==null).length;
+ if(n<questions.length&&!confirm(`هنوز ${questions.length-n} سؤال بی‌پاسخ است. نتیجه را ثبت کنیم؟`))return;
+ let score=0;
+ questions.forEach((q,i)=>{
+  if(answers[i]===q.a)score++;
+  q.o.forEach((_,j)=>{
+   const b=document.getElementById(`o${i}_${j}`);
+   b.classList.remove('selected');
+   if(j===q.a)b.classList.add('correct');
+   else if(answers[i]===j)b.classList.add('wrong');
+   b.disabled=true;
+  });
+  const f=document.getElementById('f'+i);
+  f.textContent=(answers[i]===q.a?'آفرین! پاسخ درست است. ':'پاسخ درست: '+q.o[q.a]+'؛ ')+q.e;
+  f.classList.add('show');
+ });
+ document.getElementById('scoreNum').textContent=`${faDigits(score)} از ${faDigits(questions.length)}`;
+ const pct=score/questions.length*100;
+ document.getElementById('scoreText').textContent=pct>=85?'عالی! مفاهیم فصل را خیلی خوب یاد گرفته‌ای.':pct>=65?'آفرین! با مرور نکته‌های پاسخ‌های نادرست، بهتر هم می‌شوی.':'خوب است که تمرین کردی؛ درس‌ها را دوباره مرور کن و آزمون را تکرار کن.';
+ document.getElementById('scoreBox').classList.add('show');
+ document.getElementById('submitQuiz').disabled=true;
+ document.getElementById('scoreBox').scrollIntoView({behavior:'smooth',block:'center'});
+}
+function restartQuiz(){
+ loadFreshQuestionSet();
+ document.getElementById('scoreBox').classList.remove('show');
+ document.getElementById('submitQuiz').disabled=false;
+ renderQuiz();
+}
+updatePolygon();calcInterior();calcExterior();updateSymmetryLab();updateTriangulation();updateTilingLab();updateAngleLab();updateParallelLab();updateQuadLab();loadFreshQuestionSet();renderQuiz();
+
+let xp=0;try{xp=+localStorage.getItem('r8c3xp')||0}catch(e){}
+document.getElementById('xpVal').textContent=faDigits(xp);
+function toast(t){const d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),1200)}
+function award(n){xp+=n;document.getElementById('xpVal').textContent=faDigits(xp);try{localStorage.setItem('r8c3xp',xp)}catch(e){}toast('+'+faDigits(n)+' ⭐')}
+const _sp=showPanel;showPanel=function(id){_sp(id);const b=document.querySelector('.nav-btn[data-panel="'+id+'"]');if(b&&id!=='home')b.classList.add('done')};
+document.querySelectorAll('.tabs .reveal-btn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs .reveal-btn').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.gp').forEach(g=>g.classList.toggle('show',g.id===b.dataset.gp))});
+const tfData=[
+['متوازی‌الاضلاع محور تقارن دارد اما مرکز تقارن ندارد.',0,'برعکس: متوازی‌الاضلاع معمولی مرکز تقارن دارد ولی محور تقارن ندارد.'],
+['چهارضلعی که قطرهایش بر هم عمود باشند، حتماً لوزی است.',0,'نه همیشه؛ مثلاً بادبادک هم قطرهای عمود دارد.'],
+['در هر متوازی‌الاضلاع قطرها یکدیگر را نصف می‌کنند.',1,'این یکی از ویژگی‌های اصلی متوازی‌الاضلاع است.'],
+['نه‌ضلعی منتظم مرکز تقارن دارد.',0,'تعداد ضلع فرد است؛ پس مرکز تقارن ندارد.'],
+['مثلث متساوی‌الساقین سه‌ضلعی منتظم است.',0,'منتظم یعنی هر سه ضلع و هر سه زاویه برابر باشند؛ این فقط برای متساوی‌الاضلاع برقرار است.'],
+['قطرهای متوازی‌الاضلاع با هم مساوی‌اند.',0,'فقط در مستطیل و مربع قطرها برابرند.'],
+['هفده‌ضلعی منتظم مرکز تقارن دارد.',0,'۱۷ فرد است؛ مرکز تقارن ندارد.'],
+['مثلث متساوی‌الاضلاع سه محور تقارن دارد.',1,'تعداد محورها برابر تعداد ضلع‌هاست.'],
+['دو خط عمود بر یک خط با هم موازی‌اند.',1,'درست است (در یک صفحه).'],
+['هر زاویه خارجی یک چهارضلعی برابر مجموع سه زاویه داخلی آن است.',0,'زاویه خارجی با زاویه داخلی مجاورش مکمل است، پس این رابطه نادرست است. درستش: برابر مجموع دو زاویه داخلی غیرمجاور فقط در مثلث.'],
+['مربع نوعی مستطیل است.',1,'مربع چهار زاویه قائمه دارد؛ پس مستطیل است.'],
+['هر مستطیل یک مربع است.',0,'مستطیل لازم نیست ضلع‌های برابر داشته باشد.'],
+['شش‌ضلعی منتظم مرکز تقارن دارد.',1,'۶ زوج است.']];
+function renderTF(){const a=document.getElementById('tfArea');a.innerHTML='';tfData.forEach((t,i)=>{const d=document.createElement('div');d.className='tf';d.innerHTML='<span>'+faDigits(i+1)+'. '+t[0]+'</span><div class="btns"><button>ص</button><button>غ</button></div><div class="why">'+t[2]+'</div>';
+ d.querySelectorAll('button').forEach((b,k)=>b.onclick=()=>{if(d.dataset.done)return;d.dataset.done=1;const ok=(k===0)===!!t[1];d.classList.add(ok?'ok':'no');if(ok)award(1)});a.appendChild(d)})}
+let rp=null;
+function R(a,b){return a+Math.floor(Math.random()*(b-a+1))}
+function newRp(){
+ const t=R(0,3);let q,ans,sol;
+ if(t===0){const a=R(2,4),c=R(1,3),x=R(12,30),b=R(5,30),d=180-(a+c)*x-b;if(d<0||d>60)return newRp();
+  q=`دو زاویه هم‌طرف حاصل از یک مورب و دو خط موازی، ${a}x+${b} و ${c}x+${d} درجه‌اند. x را بیاب.`;ans=x;sol=`مکمل‌اند: ${a}x+${b}+${c}x+${d}=180 → ${a+c}x=${180-b-d} → x=${x}`}
+ else if(t===1){const a=R(3,5),c=R(1,2),x=R(10,25),b=R(5,30),d=(a-c)*x+b;if(a*x+b>170)return newRp();
+  q=`در یک متوازی‌الاضلاع دو زاویه روبه‌رو ${a}x+${b} و ${c}x+${d} درجه‌اند. x را بیاب.`;ans=x;sol=`زاویه‌های روبه‌رو برابرند: ${a}x+${b}=${c}x+${d} → ${a-c}x=${d-b} → x=${x}`}
+ else if(t===2){const n=[5,6,8,9,10,12,15,18,20][R(0,8)],e=(n-2)*180/n;
+  q=`هر زاویه داخلی یک چندضلعی منتظم ${faDigits(Number(e.toFixed(2)))} درجه است. تعداد ضلع‌ها چند است؟`;ans=n;sol=`زاویه خارجی = 180−${Number(e.toFixed(2))} = ${360/n} → n = 360÷${360/n} = ${n}`}
+ else{const n=R(5,25);q=`مجموع زاویه‌های داخلی یک ${faDigits(n)}ضلعی چند درجه است؟`;ans=(n-2)*180;sol=`(${n}−2)×180 = ${ans}`}
+ rp={ans,sol};document.getElementById('rpText').textContent=q.replace(/\d+/g,m=>faDigits(m));
+ ['rpIn'].forEach(i=>document.getElementById(i).value='');document.getElementById('rpMsg').textContent='';const so=document.getElementById('rpSol');so.classList.remove('show');so.textContent=faDigits(sol)}
+function num(v){return +String(v).replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).trim()}
+function checkRp(){const v=num(document.getElementById('rpIn').value),m=document.getElementById('rpMsg');
+ if(v===rp.ans){m.textContent='🎉 آفرین! درست است.';m.style.color='#126b48';award(3)}else{m.textContent='هنوز نه؛ دوباره فکر کن یا راه‌حل را ببین.';m.style.color='#b74738'}
+ document.getElementById('rpSol').classList.add('show')}
+const fbData=[['مجموع زاویه‌های خارجی هر چندضلعی محدب چند درجه است؟',360],['هر زاویه خارجی ۳۶ضلعی منتظم چند درجه است؟',10],['مجموع زاویه‌های داخلی یک ۲۲ضلعی چند درجه است؟',3600],['هر زاویه داخلی ده‌ضلعی منتظم چند درجه است؟',144],['نه‌ضلعی منتظم چند محور تقارن دارد؟',9],['حداقل زاویه دوران پنج‌ضلعی منتظم چند درجه است؟',72]];
+function renderFB(){const a=document.getElementById('fbArea');a.innerHTML='';fbData.forEach((f,i)=>{const d=document.createElement('div');d.className='tf';d.innerHTML='<span>'+faDigits(i+1)+'. '+f[0]+'</span><div class="btns"><input type="text" inputmode="numeric" style="width:90px;text-align:center;border:1px solid #d9e2ec;border-radius:10px;padding:5px"><button>بررسی</button></div><div class="why">پاسخ: '+faDigits(f[1])+'</div>';
+ d.querySelector('button').onclick=()=>{if(d.dataset.done)return;d.dataset.done=1;const ok=num(d.querySelector('input').value)===f[1];d.classList.add(ok?'ok':'no');if(ok)award(2)};a.appendChild(d)})}
+['vt1','vt2','vt3'].forEach((id,k)=>{const el=document.getElementById(id);el.innerHTML='<option value="0">— هیچ —</option>'+[3,4,5,6,8,10,12].map(n=>`<option value="${n}">${faDigits(n)}ضلعی</option>`).join('');el.value=[12,6,4][k]});
+function calcVertex(){const ns=['vt1','vt2','vt3'].map(i=>+document.getElementById(i).value).filter(n=>n);const parts=ns.map(n=>(n-2)*180/n),sum=parts.reduce((a,b)=>a+b,0);
+ document.getElementById('vtSum').textContent=ns.length?parts.map(p=>faDigits(Number(p.toFixed(1)))).join(' + ')+' = '+faDigits(Number(sum.toFixed(1)))+'°':'—';
+ const ok=Math.abs(sum-360)<1e-9,r=document.getElementById('vtRes');r.className='lab-result'+(ok?'':' no');r.textContent=ok?'دقیقاً ۳۶۰°؛ این ترکیب دور یک نقطه را کامل پر می‌کند.':sum>360?'بیشتر از ۳۶۰° است؛ کاشی‌ها روی هم می‌افتند.':'کمتر از ۳۶۰° است؛ فضای خالی می‌ماند.'}
+renderTF();renderFB();newRp();calcVertex();
+
+function drag(svg,pts,on){let cur=null;const vb=svg.viewBox.baseVal;
+ pts.forEach(c=>{c.style.cursor='grab';c.addEventListener('pointerdown',e=>{cur=c;c.setPointerCapture(e.pointerId);e.preventDefault()})});
+ svg.addEventListener('pointermove',e=>{if(!cur)return;const r=svg.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*vb.width,y=(e.clientY-r.top)/r.height*vb.height;
+  cur.setAttribute('cx',Math.max(15,Math.min(vb.width-15,x)));cur.setAttribute('cy',Math.max(15,Math.min(vb.height-15,y)));on()});
+ svg.addEventListener('pointerup',()=>cur=null);on()}
+const $=i=>document.getElementById(i),g=(e,k)=>+$(e).getAttribute(k),fd=v=>faDigits(Math.round(v));
+function put(t,x,y){$(t).setAttribute('x',x+16);$(t).setAttribute('y',y-14)}
+const C0=[200,115];
+function fig(id,lines,sq,hs){let h='';lines.forEach((c,i)=>h+=`<path id="${id}l${i}" stroke="${c}" stroke-width="4" stroke-linecap="round"/><path id="${id}m${i}" fill="none" stroke="#172b4d" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`);
+ for(let i=0;i<sq;i++)h+=`<path id="${id}q${i}" fill="#ffd77a99" stroke="#c68c2e" stroke-width="2"/>`;
+ hs.forEach((c,i)=>h+=`<circle id="${id}h${i}" data-k="${i}" r="13" fill="${c}" stroke="#fff" stroke-width="3"/>`);
+ lines.forEach((c,i)=>h+=`<text id="${id}t${i}" font-size="17" font-weight="900" fill="${c}"></text>`);$(id).innerHTML=h}
+function setL(id,i,px,py,dx,dy,lab,tt,mk){if(mk!==undefined){const qx=px+dx*mk,qy=py+dy*mk,nx=-dy,ny=dx;$(id+'m'+i).setAttribute('d',`M${qx-dx*5+nx*9} ${qy-dy*5+ny*9}L${qx+dx*6} ${qy+dy*6}L${qx-dx*5-nx*9} ${qy-dy*5-ny*9}`)}$(id+'l'+i).setAttribute('d',`M${px-dx*700} ${py-dy*700}L${px+dx*700} ${py+dy*700}`);const t=$(id+'t'+i);t.setAttribute('x',px+dx*tt+8);t.setAttribute('y',py+dy*tt-8);t.textContent=lab}
+function setQ(id,i,px,py,u,v){$(id+'q'+i).setAttribute('d',`M${px+u[0]*17} ${py+u[1]*17}L${px+u[0]*17+v[0]*17} ${py+u[1]*17+v[1]*17}L${px+v[0]*17} ${py+v[1]*17}`)}
+function setH(id,i,x,y){const h=$(id+'h'+i);h.setAttribute('cx',x);h.setAttribute('cy',y)}
+function drag2(id,fn){const svg=$(id),vb=svg.viewBox.baseVal;let cur=null;svg.addEventListener('pointerdown',e=>{if(e.target.dataset.k===undefined)return;cur=e.target;cur.setPointerCapture(e.pointerId);e.preventDefault()});
+ svg.addEventListener('pointermove',e=>{if(!cur)return;const r=svg.getBoundingClientRect();fn(+cur.dataset.k,(e.clientX-r.left)/r.width*vb.width,(e.clientY-r.top)/r.height*vb.height)});svg.addEventListener('pointerup',()=>cur=null)}
+const cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+function frame(sl,out){const th=+$(sl).value*Math.PI/180;$(sl+'v').textContent=faDigits(+$(sl).value)+'°';return {u:[Math.cos(th),Math.sin(th)],n:[-Math.sin(th),Math.cos(th)]}}
+// اصل ۱
+fig('eu1',['#17a99b','#4b8bd8','#ff806b'],0,['#17a99b','#4b8bd8','#ff806b']);const o1=[-65,0,65];
+function u1(){const {u,n}=frame('t1');['a','d','b'].forEach((l,i)=>{const px=C0[0]+n[0]*o1[i],py=C0[1]+n[1]*o1[i];setL('eu1',i,px,py,u[0],u[1],l,-150,-100);setH('eu1',i,px+u[0]*150,py+u[1]*150)});
+ const m=$('r1');m.className='lab-result';m.textContent='فاصلهٔ a تا d: '+faDigits(Math.round(Math.abs(o1[0]-o1[1])))+' ، d تا b: '+faDigits(Math.round(Math.abs(o1[1]-o1[2])))+' ← هر سه خط هم‌جهت‌اند و هرگز همدیگر را قطع نمی‌کنند؛ پس a || b ✔'}
+drag2('eu1',(k,x,y)=>{const {n}=frame('t1');o1[k]=cl((x-C0[0])*n[0]+(y-C0[1])*n[1],-100,100);u1()});$('t1').oninput=u1;u1();
+// اصل ۲
+fig('eu2',['#17a99b','#ff806b','#4b8bd8'],2,['#ff806b','#4b8bd8']);let ob=60,sd=0;
+function u2(){const {u,n}=frame('t2'),oa=-55;const P=(s,o)=>[C0[0]+u[0]*s+n[0]*o,C0[1]+u[1]*s+n[1]*o];
+ let p=P(0,oa);setL('eu2',0,p[0],p[1],u[0],u[1],'a',-150,-90);p=P(0,ob);setL('eu2',1,p[0],p[1],u[0],u[1],'b',-150,-90);setH('eu2',0,p[0]+u[0]*150,p[1]+u[1]*150);
+ p=P(sd,0);setL('eu2',2,p[0],p[1],n[0],n[1],'d',-100);p=P(sd,100);setH('eu2',1,p[0],p[1]);
+ const pa=P(sd,oa),pb=P(sd,ob);setQ('eu2',0,pa[0],pa[1],u,n);setQ('eu2',1,pb[0],pb[1],u,n);
+ const m=$('r2');m.className='lab-result';m.textContent='d بر a عمود است (مربع زرد) و چون a || b ، زاویهٔ d با b هم ۹۰° می‌شود؛ پس d ⊥ b ✔'}
+drag2('eu2',(k,x,y)=>{const {u,n}=frame('t2'),dx=x-C0[0],dy=y-C0[1];if(k===0)ob=cl(dx*n[0]+dy*n[1],-20,95);else sd=cl(dx*u[0]+dy*u[1],-130,130);u2()});$('t2').oninput=u2;u2();
+// اصل ۳
+fig('eu3',['#4b8bd8','#17a99b','#ff806b'],2,['#17a99b','#ff806b']);const sp=[-70,70];
+function u3(){const {u,n}=frame('t3');setL('eu3',0,C0[0],C0[1],u[0],u[1],'d',-150);
+ ['a','b'].forEach((l,i)=>{const px=C0[0]+u[0]*sp[i],py=C0[1]+u[1]*sp[i];setL('eu3',i+1,px,py,n[0],n[1],l,-95,-55);setH('eu3',i,px+n[0]*95,py+n[1]*95);setQ('eu3',i,px,py,u,n)});
+ const m=$('r3');m.className='lab-result';m.textContent='a و b هر دو بر d عمودند (زاویه‌های ۹۰°)؛ پس هم‌جهت‌اند و a || b ✔  فاصلهٔ آن‌ها: '+faDigits(Math.round(Math.abs(sp[0]-sp[1])))}
+drag2('eu3',(k,x,y)=>{const {u}=frame('t3');sp[k]=cl((x-C0[0])*u[0]+(y-C0[1])*u[1],-140,140);u3()});$('t3').oninput=u3;u3();
+function u7(){const th=+$('t7').value,r=th*Math.PI/180,c=Math.cos(r),s=Math.sin(r);$('t7v').textContent=fd(th)+'°';
+ let h=`<path d="M0 70H400M0 170H400" stroke="#4b8bd8" stroke-width="4"/><path d="M30 64l8 6-8 6M30 164l8 6-8 6" stroke="#172b4d" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M${200+50*c/s-200*c/s*0} 70L${200-50*c/s} 170" stroke="#ed806d" stroke-width="4" stroke-linecap="round"/>`;
+ [[200+50*c/s,70],[200-50*c/s,170]].forEach(([ix,iy])=>{[[0,th,th],[th,180,180-th],[180,180+th,th],[180+th,360,180-th]].forEach(([a,b,v])=>{const m=(a+b)/2*Math.PI/180,col=v===th?'#17a99b':'#ff806b';
+  h+=`<text x="${ix+34*Math.cos(m)}" y="${iy-34*Math.sin(m)+5}" text-anchor="middle" font-size="13" font-weight="900" fill="${col}">${fd(v)}°</text>`})});
+ $('s7').innerHTML=h}
+$('t7').oninput=u7;u7();
+function u8(){const P=['A8','B8','C8'].map(i=>[g(i,'cx'),g(i,'cy')]),[A,B,C]=P,ang=(p,q,r)=>{const a=Math.atan2(q[1]-p[1],q[0]-p[0])-Math.atan2(r[1]-p[1],r[0]-p[0]);let d=Math.abs(a)*180/Math.PI;return d>180?360-d:d};
+ $('tri8').setAttribute('points',P.join(' '));const dx=C[0]-B[0],dy=C[1]-B[1],L=Math.hypot(dx,dy)||1;$('ext8').setAttribute('d',`M${C[0]} ${C[1]}L${C[0]+dx/L*90} ${C[1]+dy/L*90}`);
+ put('tA8',A[0],A[1]);put('tB8',B[0],B[1]);put('tC8',C[0],C[1]);
+ const a=ang(A,B,C),b=ang(B,A,C),e=180-ang(C,A,B);$('r8').innerHTML=`A = ${fd(a)}° ، B = ${fd(b)}° ، زاویه خارجی C = ${fd(e)}°<br>A + B = ${fd(a+b)}° ✔`}
+drag($('s8'),[$('A8'),$('B8'),$('C8')],u8);
+</script>
+</body>
+</html>
